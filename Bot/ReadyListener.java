@@ -9,6 +9,6 @@ public class ReadyListener implements EventListener {
     public void onEvent(Event event)
     {
         if (event instanceof ReadyEvent)
-            System.out.println("API is ready!");
+            System.out.println("[Huzo-Log] API is ready!");
     }
 }

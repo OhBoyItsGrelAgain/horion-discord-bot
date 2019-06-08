@@ -4,8 +4,12 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 
 import javax.security.auth.login.LoginException;
+import java.util.ArrayList;
 
 public class Main {
+    public static String version = "1.0";
+    public static String admins = "zFeli#6857, richard#1337";
+
     public static void main(String[] args)
             throws LoginException, InterruptedException
     {
@@ -14,5 +18,6 @@ public class Main {
                 .addEventListener(new MessageListener())
                 .build();
         jda.awaitReady();
+        jda.setAutoReconnect(true);
     }
 }
