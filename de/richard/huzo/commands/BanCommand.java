@@ -1,34 +1,19 @@
 package de.richard.huzo.commands;
 
-import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.TreeMap;
 
-public class BanCommand extends Command {
+public class BanCommand extends Command
 
-    private TreeMap<String, Command> commands;
-
-    public BanCommand()
-    {
-        commands = new TreeMap<>();
-    }
-
-    public Command registerCommand(Command command)
-    {
-        commands.put(command.getAliases().get(0), command);
-        return command;
-    }
-
+{
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
     {
+
         Member member = e.getMember();
         Member selfMember = e.getGuild().getSelfMember();
         List<Member> mentioned = e.getMessage().getMentionedMembers();
@@ -40,7 +25,7 @@ public class BanCommand extends Command {
         if ((args.length > 2) || mentioned.isEmpty()) {
             e.getTextChannel().sendMessage("**" + member.getAsMention() + ":** Bitte erwähne einen Nutzer.").queue();
             return;
-            }
+        }
 
         Member target = mentioned.get(0);
 
@@ -61,13 +46,13 @@ public class BanCommand extends Command {
     @Override
     public List<String> getAliases()
     {
-        return Arrays.asList(".ban", ".letthebanhammerspeak");
+        return Arrays.asList(".ban");
     }
 
     @Override
     public String getDescription()
     {
-        return "Banne einen anderen Nutzer.";
+        return "Banne einen Nutzer.";
     }
 
     @Override
@@ -79,6 +64,6 @@ public class BanCommand extends Command {
     @Override
     public List<String> getUsageInstructions()
     {
-        return Collections.singletonList(".ban *<user>*\n");
+        return Arrays.asList(".ban <Nutzer> - Banne einen Nutzer.");
     }
 }
