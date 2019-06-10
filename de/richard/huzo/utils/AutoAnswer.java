@@ -10,9 +10,15 @@ public class AutoAnswer extends ListenerAdapter {
             case "hi": {
                 event.getChannel().sendMessage("Hi!").queue();
             } break;
-            case "Nana ist schwul": {
+            case "nana ist schwul": {
                 event.getChannel().sendMessage("Das stimmt!").queue();
             } break;
+            case "tschüss": {
+                event.getChannel().sendMessage("Tschüss!").queue();
+            } break;
+            case "cucu": {
+                event.getChannel().sendMessage("Tschüss!").queue();
+            }
         }
     }
 }

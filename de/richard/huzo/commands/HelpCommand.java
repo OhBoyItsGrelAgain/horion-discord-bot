@@ -1,5 +1,6 @@
 package de.richard.huzo.commands;
 
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.PrivateChannel;
@@ -62,6 +63,12 @@ public class HelpCommand extends Command
     }
 
     @Override
+    public String getIcon()
+    {
+        return "https://files.catbox.moe/47k7vh.png";
+    }
+
+    @Override
     public List<String> getUsageInstructions()
     {
         return Collections.singletonList(
@@ -86,9 +93,9 @@ public class HelpCommand extends Command
                 s.append(description).append("\n");
             }
 
-            channel.sendMessage(new MessageBuilder()
-                    .append("Huzo unterstützt folgende Commands:\n")
-                    .append(s.toString())
+            channel.sendMessage(new EmbedBuilder()
+                    .setTitle("Huzo unterstützt folgende Commands:\n")
+                    .setDescription(s.toString())
                     .build()).queue();
         }
         else
@@ -100,18 +107,18 @@ public class HelpCommand extends Command
                 {
                     String name = c.getName();
                     String description = c.getDescription();
+                    String iconurl = c.getIcon();
                     List<String> usageInstructions = c.getUsageInstructions();
                     name = (name == null || name.isEmpty()) ? NO_NAME : name;
                     description = (description == null || description.isEmpty()) ? NO_DESCRIPTION : description;
                     usageInstructions = (usageInstructions == null || usageInstructions.isEmpty()) ? Collections.singletonList(NO_USAGE) : usageInstructions;
 
-                    //TODO: Mit PN ersetzen
-                    channel.sendMessage(new MessageBuilder()
-                            .append("**Name:** " + name + "\n")
-                            .append("**Beschreibung:** " + description + "\n")
-                            .append("**Aliases:** " + StringUtils.join(c.getAliases(), ", ") + "\n")
-                            .append("**Anwendung:** ")
-                            .append(usageInstructions.get(0))
+                    // WIP: Als Embed
+                    channel.sendMessage(new EmbedBuilder()
+                            .setAuthor( name, "https://huzo.bot/commands#" + name, iconurl)
+                            .addField("**Beschreibung:**", description, false)
+                            .addField("**Aliase:** ", StringUtils.join(c.getAliases(), ", "), false)
+                            .addField("**Anwendung:** ", c.getUsageInstructions().get(0), false)
                             .build()).queue();
                     for (int i = 1; i < usageInstructions.size(); i++)
                     {

@@ -4,6 +4,8 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+import javax.jws.Oneway;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class BanCommand extends Command
         List<Member> mentioned = e.getMessage().getMentionedMembers();
 
         if(e.isFromType(ChannelType.PRIVATE)) {
-            e.getTextChannel().sendMessage(":exclamation: **Dieser Command kann nur in einem Server-Text-Channel benutzt werden**").queue();
+            e.getChannel().sendMessage(":exclamation: **Dieser Command kann nur in einem Server-Text-Channel benutzt werden**").queue();
             return;
         }
         if ((args.length > 2) || mentioned.isEmpty()) {
@@ -59,6 +61,12 @@ public class BanCommand extends Command
     public String getName()
     {
         return "Ban-Command";
+    }
+
+    @Override
+    public String getIcon()
+    {
+        return "https://files.catbox.moe/s3ueug.png";
     }
 
     @Override

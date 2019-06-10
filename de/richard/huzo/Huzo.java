@@ -3,6 +3,7 @@ package de.richard.huzo;
 import de.richard.huzo.commands.BanCommand;
 import de.richard.huzo.commands.HelpCommand;
 import de.richard.huzo.commands.InfoCommand;
+import de.richard.huzo.commands.PingCommand;
 import de.richard.huzo.utils.AutoAnswer;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -24,6 +25,7 @@ public class Huzo
                 jda.addEventListener(cmd.registerCommand(cmd));
                 jda.addEventListener(cmd.registerCommand(new InfoCommand()));
                 jda.addEventListener(cmd.registerCommand(new BanCommand()));
+                jda.addEventListener(cmd.registerCommand(new PingCommand()));
 
                 jda.addEventListener(new AutoAnswer());
                 jda.addEventListener(new Logger());

@@ -18,7 +18,6 @@ public class InfoCommand extends Command
                 .setTitle("**Information**")
                 .setDescription("**Huzo-Bot, ein simples Freizeit-Projekt.**")
                 .setColor(new Color(255, 176, 111))
-                .addBlankField(false)
                 .addField("Version", Huzo.version, false)
                 .addField("ID", e.getJDA().getSelfUser().getId(), false)
                 .addField("Github", "https://github.com/richardletshacks/huzo-discord-bot", false)
@@ -43,6 +42,12 @@ public class InfoCommand extends Command
     public String getName()
     {
         return "Info-Command";
+    }
+
+    @Override
+    public String getIcon()
+    {
+        return "https://files.catbox.moe/g9w833.png";
     }
 
     @Override

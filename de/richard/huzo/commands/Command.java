@@ -14,6 +14,7 @@ public abstract class Command extends ListenerAdapter
     public abstract List<String> getAliases();
     public abstract String getDescription();
     public abstract String getName();
+    public abstract String getIcon();
     public abstract List<String> getUsageInstructions();
 
     @Override
