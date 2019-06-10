@@ -7,6 +7,7 @@ import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.commons.lang.StringUtils;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,9 +37,9 @@ public class HelpCommand extends Command
     {
         if(!e.isFromType(ChannelType.PRIVATE))
         {
-            e.getTextChannel().sendMessage(new MessageBuilder()
-                    .append(e.getAuthor())
-                    .append(": Die Hilfe wurde dir als Privat-Nachricht gesendet.")
+            e.getTextChannel().sendMessage(new EmbedBuilder()
+                    .setColor(new Color(0x4D95E9))
+                    .setTitle(e.getAuthor().getName() + ": Die Hilfe wurde dir als Privat-Nachricht gesendet.")
                     .build()).queue();
         }
         sendPrivate(e.getAuthor().openPrivateChannel().complete(), args);
@@ -83,20 +84,20 @@ public class HelpCommand extends Command
     {
         if (args.length < 2)
         {
-            StringBuilder s = new StringBuilder();
+            EmbedBuilder msg = new EmbedBuilder()
+                    .setTitle("**Hilfe-Menü**")
+                    .setDescription("**Huzo unterstützt folgende Commands:**")
+                    .setColor(new Color(0x4D95E9));
+
             for (Command c : commands.values())
             {
                 String description = c.getDescription();
                 description = (description == null || description.isEmpty()) ? NO_DESCRIPTION : description;
-
-                s.append("**").append(c.getAliases().get(0)).append("** - ");
-                s.append(description).append("\n");
+                msg.addField(c.getAliases().get(0), description, false);
             }
 
-            channel.sendMessage(new EmbedBuilder()
-                    .setTitle("Huzo unterstützt folgende Commands:\n")
-                    .setDescription(s.toString())
-                    .build()).queue();
+            msg.setFooter("Tipp: Gebe .help <command> ein um genauere Informationen zu bekommen!", "https://files.catbox.moe/g9w833.png");
+            channel.sendMessage(msg.build()).queue();
         }
         else
         {
@@ -116,6 +117,7 @@ public class HelpCommand extends Command
                     // WIP: Als Embed
                     channel.sendMessage(new EmbedBuilder()
                             .setAuthor( name, "https://huzo.bot/commands#" + name, iconurl)
+                            .setColor(new Color(0x4D95E9))
                             .addField("**Beschreibung:**", description, false)
                             .addField("**Aliase:** ", StringUtils.join(c.getAliases(), ", "), false)
                             .addField("**Anwendung:** ", c.getUsageInstructions().get(0), false)
@@ -130,8 +132,9 @@ public class HelpCommand extends Command
                     return;
                 }
             }
-            channel.sendMessage(new MessageBuilder()
-                    .append("Der Command '**" + args[1] + "**' existiert nicht. Benutze .help um alle Commands anzeigen zu lassen.")
+            channel.sendMessage(new EmbedBuilder()
+                    .setColor(new Color(0x4D95E9))
+                    .addField(":exclamation: **Fehler:**", "Der Command '**" + args[1] + "**' existiert nicht. Benutze .help um alle Commands anzeigen zu lassen.", false)
                     .build()).queue();
         }
     }

@@ -1,3 +1,2 @@
-# The Huzo Discord-Bot
-The best discord bot available.
-Made by Richard and Felix
+# Der Huzo Discord-Bot
+Der beste Discord-Bot, den es je gab.

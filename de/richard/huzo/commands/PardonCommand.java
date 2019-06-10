@@ -7,7 +7,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.util.Arrays;
 import java.util.List;
 
-public class BanCommand extends Command
+public class PardonCommand extends Command
 
 {
     @Override
@@ -18,7 +18,7 @@ public class BanCommand extends Command
         Member selfMember = e.getGuild().getSelfMember();
         List<Member> mentioned = e.getMessage().getMentionedMembers();
 
-        if(e.isFromType(ChannelType.PRIVATE)) {
+        if(!(e.isFromType(ChannelType.TEXT))) {
             e.getChannel().sendMessage(":exclamation: **Dieser Command kann nur in einem Server-Text-Channel benutzt werden**").queue();
             return;
         }
@@ -28,10 +28,6 @@ public class BanCommand extends Command
         }
 
         Member target = mentioned.get(0);
-        String reason = "";
-        for(int x = 2; x < args.length; x++) {
-            reason = reason + args[x];
-    }
 
         if(!member.hasPermission(Permission.BAN_MEMBERS) || !member.canInteract(target)) {
             e.getTextChannel().sendMessage(":exclamation: **FEHLER:** Du hast keine Berechtigung dazu.").queue();
@@ -43,27 +39,29 @@ public class BanCommand extends Command
             return;
         }
 
-        target.getUser().openPrivateChannel().complete().sendMessage("Du wurdest von **" + e.getAuthor().getAsMention() + "** auf **" + e.getGuild().getName() + "** wegen **" + reason + "** gebannt.").queue();
-        e.getGuild().getController().ban(target.getUser(), 1).reason("Nutzer wurde von " + e.getAuthor().getAsTag() + " wegen \"" + reason + "\n gebannt.").queue();
-        e.getTextChannel().sendMessage(target.getAsMention() + " wurde erfolgreich gebannt!").queue();
+        String invite = e.getGuild().getDefaultChannel().createInvite().setMaxUses(1).toString();
+
+        e.getGuild().getController().unban(target.getUser());
+        target.getUser().openPrivateChannel().complete().sendMessage("Du wurdest von **" + e.getAuthor().getAsMention() + "** auf **" + e.getGuild().getName() + "** entbannt. Du kannst dem Server unter **" + invite + "** wieder beitreten.").queue();
+        e.getTextChannel().sendMessage(target.getAsMention() + " wurde erfolgreich entbannt!").queue();
     }
 
     @Override
     public List<String> getAliases()
     {
-        return Arrays.asList(".ban");
+        return Arrays.asList(".pardon, .unban");
     }
 
     @Override
     public String getDescription()
     {
-        return "Banne einen Nutzer.";
+        return "Entbanne einen Nutzer.";
     }
 
     @Override
     public String getName()
     {
-        return "Ban-Command";
+        return "Pardon-Command";
     }
 
     @Override
@@ -75,6 +73,6 @@ public class BanCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".ban <Nutzer> - Banne einen Nutzer.");
+        return Arrays.asList(".pardon <Nutzer> - Entbanne einen Nutzer.");
     }
 }

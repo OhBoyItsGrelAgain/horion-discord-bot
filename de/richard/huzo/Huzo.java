@@ -1,15 +1,15 @@
 package de.richard.huzo;
 
-import de.richard.huzo.commands.BanCommand;
-import de.richard.huzo.commands.HelpCommand;
-import de.richard.huzo.commands.InfoCommand;
-import de.richard.huzo.commands.PingCommand;
+import de.richard.huzo.commands.*;
 import de.richard.huzo.utils.AutoAnswer;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.User;
 
 import javax.security.auth.login.LoginException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Huzo
 {
@@ -26,6 +26,7 @@ public class Huzo
                 jda.addEventListener(cmd.registerCommand(new InfoCommand()));
                 jda.addEventListener(cmd.registerCommand(new BanCommand()));
                 jda.addEventListener(cmd.registerCommand(new PingCommand()));
+                jda.addEventListener(cmd.registerCommand(new PardonCommand()));
 
                 jda.addEventListener(new AutoAnswer());
                 jda.addEventListener(new Logger());
@@ -36,7 +37,7 @@ public class Huzo
     }
 
     public static boolean isBotAdmin(User user) {
-        String admins = "zFeli#6857, richard#1337";
+        String admins =  "richard#1337, zFeli#6857";
         return (admins.contains(user.getAsTag()));
     }
 
