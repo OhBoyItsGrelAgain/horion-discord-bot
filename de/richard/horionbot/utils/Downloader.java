@@ -1,4 +1,4 @@
-package de.richard.huzo.utils;
+package de.richard.horionbot.utils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

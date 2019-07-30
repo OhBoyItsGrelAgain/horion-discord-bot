@@ -1,4 +1,4 @@
-package de.richard.huzo.commands;
+package de.richard.horionbot.commands;
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -10,6 +10,7 @@ public class PingCommand extends Command
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
     {
+        e.getMessage().delete().queue();
         e.getTextChannel().sendMessage("**Ping:** " + e.getJDA().getPing() + " ms").queue();
     }
 
@@ -22,7 +23,7 @@ public class PingCommand extends Command
     @Override
     public String getDescription()
     {
-        return "Zeige dir die Ping des Bots an!";
+        return "Display the bots ping!";
     }
 
     @Override
@@ -40,6 +41,6 @@ public class PingCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".ping - Zeige dir die Ping des Bots an!");
+        return Arrays.asList(".ping - Display the bots ping!");
     }
 }

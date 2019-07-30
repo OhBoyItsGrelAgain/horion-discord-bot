@@ -1,6 +1,6 @@
-package de.richard.huzo.commands;
+package de.richard.horionbot.commands;
 
-import de.richard.huzo.Huzo;
+import de.richard.horionbot.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -14,14 +14,15 @@ public class InfoCommand extends Command
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
     {
+        e.getMessage().delete().queue();
         MessageEmbed msg = new EmbedBuilder()
                 .setTitle("**Information**")
-                .setDescription("**Huzo-Bot, ein simples Freizeit-Projekt.**")
+                .setDescription("**horion discord bot, only for epic gamers**")
                 .setColor(new Color(255, 176, 111))
-                .addField("Version", Huzo.version, false)
+                .addField("Version", Main.version, false)
                 .addField("ID", e.getJDA().getSelfUser().getId(), false)
                 .addField("Github", "https://github.com/richardletshacks/huzo-discord-bot", false)
-                .setFooter("Made by Richard, mit Hilfe der Java-Discord-API (JDA)", "https://files.catbox.moe/y690bs.png")
+                .setFooter("Made by Richard, with help of the Java-Discord-API (JDA)", "https://files.catbox.moe/y690bs.png")
                 .build();
         e.getTextChannel().sendMessage(msg).queue();
     }
@@ -35,7 +36,7 @@ public class InfoCommand extends Command
     @Override
     public String getDescription()
     {
-        return "Zeige dir Informationen über den Bot an";
+        return "Displays information about the bot";
     }
 
     @Override
@@ -53,6 +54,6 @@ public class InfoCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".info - Zeige dir Informationen über den Bot an");
+        return Arrays.asList(".info - Displays information about the bot");
     }
 }

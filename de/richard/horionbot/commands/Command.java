@@ -1,4 +1,4 @@
-package de.richard.huzo.commands;
+package de.richard.horionbot.commands;
 
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.ChannelType;
