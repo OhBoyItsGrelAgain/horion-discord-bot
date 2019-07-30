@@ -3,6 +3,7 @@ package de.richard.horionbot;
 import de.richard.horionbot.commands.*;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
 
 import javax.security.auth.login.LoginException;
 
@@ -23,7 +24,11 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
                 jda.addEventListener(cmd.registerCommand(new GithubCommand()));
 
+                // Register Logger
                 jda.addEventListener(new Logger());
+
+                // Set game activity
+                jda.setGame(Game.of(Game.GameType.DEFAULT, "with Horion"));
 
         JDA bot = jda.build();
         bot.awaitReady();
