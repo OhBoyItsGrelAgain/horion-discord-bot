@@ -1,3 +1,2 @@
-# The Huzo Discord-Bot
-The best discord bot available.
-Made by Richard and Felix
+# The Horion Discord-Bot
+only epic gamers may see this
