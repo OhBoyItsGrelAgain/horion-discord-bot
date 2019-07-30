@@ -37,7 +37,6 @@ public class HelpCommand extends Command
     {
         if(!e.isFromType(ChannelType.PRIVATE))
         {
-            e.getMessage().delete().queue();
             e.getTextChannel().sendMessage(new EmbedBuilder()
                     .setColor(new Color(0x4D95E9))
                     .setTitle(e.getAuthor().getName() + ": Help was sent to you as private message.")

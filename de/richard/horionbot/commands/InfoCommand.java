@@ -14,14 +14,13 @@ public class InfoCommand extends Command
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
     {
-        e.getMessage().delete().queue();
         MessageEmbed msg = new EmbedBuilder()
                 .setTitle("**Information**")
                 .setDescription("**horion discord bot, only for epic gamers**")
                 .setColor(new Color(255, 176, 111))
                 .addField("Version", Main.version, false)
                 .addField("ID", e.getJDA().getSelfUser().getId(), false)
-                .addField("Github", "https://github.com/richardletshacks/huzo-discord-bot", false)
+                .addField("Github", "https://github.com/richardletshacks/horion-discord-bot", false)
                 .setFooter("Made by Richard, with help of the Java-Discord-API (JDA)", "https://files.catbox.moe/y690bs.png")
                 .build();
         e.getTextChannel().sendMessage(msg).queue();

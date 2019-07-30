@@ -8,7 +8,7 @@ import javax.security.auth.login.LoginException;
 
 public class Main
 {
-    public static String version = "0.2";
+    public static String version = "0.3";
 
     public static void main(String[] args)
             throws LoginException, InterruptedException

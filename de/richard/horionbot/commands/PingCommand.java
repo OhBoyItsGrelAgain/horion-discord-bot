@@ -1,7 +1,10 @@
 package de.richard.horionbot.commands;
 
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,8 +13,11 @@ public class PingCommand extends Command
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
     {
-        e.getMessage().delete().queue();
-        e.getTextChannel().sendMessage("**Ping:** " + e.getJDA().getPing() + " ms").queue();
+        Long ping = e.getJDA().getPing();
+        Color color = Color.RED;
+        if(ping < 100) color = Color.ORANGE;
+        if(ping < 20) color = Color.GREEN;
+        e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Ping:** " + ping + " ms").setColor(color).build()).queue();
     }
 
     @Override
