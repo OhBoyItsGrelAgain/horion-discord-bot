@@ -27,7 +27,7 @@ public class TroubleshootingCommand extends Command
                         "\nYou can also try to inject the dll directly without using Horions injector. For this, follow these steps:\n" +
                         "- Download the dll from [Horions GitHub repo](https://github.com/horionclient/Horion-Releases/releases/latest)\n" +
                         "- Set the right permissions (Needed cause Minecraft is an UWP app)\n" +
-                        "- Use another injector such as [Cheat Engines](https://www.cheatengine.org/) or Extreme Injector (https://bit.ly/2LhTEwd)\n", false)
+                        "- Use another injector such as [Cheat Engines](https://www.cheatengine.org/) or [Extreme Injector](https://bit.ly/2LhTEwd)\n", false)
                 .addField("Cheat Engine errors", "If your error looks similar to [this](https://gyazo.com/ba06bc955a258b3c5406f67a30b4f37b), download [this](https://www.microsoft.com/en-us/download/details.aspx?id=53840) runtime and re-inject afterwards", false)
 
                 .build();

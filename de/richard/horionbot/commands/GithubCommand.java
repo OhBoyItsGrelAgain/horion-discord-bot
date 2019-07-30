@@ -13,7 +13,7 @@ public class GithubCommand extends Command
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
     {
-        e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("You can find Horions GitHub repo [here](https://github.com/horionclient/Horion-Releases)").build()).queue();
+        e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("You can find Horions GitHub repo [here](https://github.com/horionclient/Horion-Releases).").build()).queue();
     }
 
     @Override

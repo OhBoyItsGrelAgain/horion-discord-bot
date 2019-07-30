@@ -21,6 +21,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new InfoCommand()));
                 jda.addEventListener(cmd.registerCommand(new PingCommand()));
                 jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
+                jda.addEventListener(cmd.registerCommand(new GithubCommand()));
 
                 jda.addEventListener(new Logger());
 
