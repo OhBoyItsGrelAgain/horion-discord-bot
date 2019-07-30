@@ -20,6 +20,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(cmd));
                 jda.addEventListener(cmd.registerCommand(new InfoCommand()));
                 jda.addEventListener(cmd.registerCommand(new PingCommand()));
+                jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
 
                 jda.addEventListener(new Logger());
 
