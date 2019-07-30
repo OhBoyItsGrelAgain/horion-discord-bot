@@ -1,7 +1,10 @@
 package de.richard.horionbot.commands;
 
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,8 +13,13 @@ public class TroubleshootingCommand extends Command
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
     {
-        e.getMessage().delete().queue();
-        e.getTextChannel().sendMessage("**Ping:** " + e.getJDA().getPing() + " ms").queue();
+        MessageEmbed msg = new EmbedBuilder()
+                .setColor(new Color(0x4D95E9))
+                .setTitle("**Troubleshooting**")
+                .setThumbnail(this.getIcon())
+                .setFooter("*If this didnt help you, feel free to contact the devs with further information", "https://files.catbox.moe/g9w833.png")
+
+                .build();
     }
 
     @Override
@@ -23,24 +31,24 @@ public class TroubleshootingCommand extends Command
     @Override
     public String getDescription()
     {
-        return "Display the bots ping!";
+        return "Display the troubleshooting embed!";
     }
 
     @Override
     public String getName()
     {
-        return "Ping-Command";
+        return "Troubleshooting-Command";
     }
 
     @Override
     public String getIcon()
     {
-        return "https://files.catbox.moe/tau093.png";
+        return "https://files.catbox.moe/dnvr34.png";
     }
 
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".ping - Display the bots ping!");
+        return Arrays.asList(".troubleshoot - Display troubleshooting message!");
     }
 }
