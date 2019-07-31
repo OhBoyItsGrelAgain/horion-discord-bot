@@ -21,7 +21,7 @@ public class Main
     public static void main(String[] args)
             throws LoginException, InterruptedException
     {
-        JDABuilder jda = new JDABuilder("NjA1ODIyNjAyNDAwODkwOTAz.XUFbpA.ovk-Hamfm6S58P2BLfg7teii9OQ");
+        JDABuilder jda = new JDABuilder("NjA1ODIyNjAyNDAwODkwOTAz.XUGTNA.UwDoJ57nZpUhrr7g0suT3Y5FnFs");
 
                 // Add Commands
                 HelpCommand cmd = new HelpCommand();
