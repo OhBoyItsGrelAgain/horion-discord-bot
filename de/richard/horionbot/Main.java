@@ -14,7 +14,7 @@ public class Main
     public static void main(String[] args)
             throws LoginException, InterruptedException
     {
-        JDABuilder jda = new JDABuilder("NjA1ODIyNjAyNDAwODkwOTAz.XUCGfA.wfyF4Jiu5s6hcmwqOjQV4YY0WUw");
+        JDABuilder jda = new JDABuilder("NjA1ODIyNjAyNDAwODkwOTAz.XUFbpA.ovk-Hamfm6S58P2BLfg7teii9OQ");
 
                 // Add Commands
                 HelpCommand cmd = new HelpCommand();
@@ -23,6 +23,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new PingCommand()));
                 jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
                 jda.addEventListener(cmd.registerCommand(new GithubCommand()));
+                jda.addEventListener(cmd.registerCommand(new ModuleinfoCommand()));
 
                 // Register Logger
                 jda.addEventListener(new Logger());
