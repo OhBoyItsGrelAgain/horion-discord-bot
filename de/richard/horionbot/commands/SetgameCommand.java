@@ -19,18 +19,19 @@ public class SetgameCommand extends Command
     {
         if(UserInfo.isBotAdmin(e.getAuthor())) {
         if(args.length < 2) {
-            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** Please specify a game").build());
+            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** Please specify a game").build()).queue();
         } else {
             String game = "";
             for (int x = 0;  x < args.length; x++) {
-                game = game + args[x];
+                game = game + args[x] + " ";
             }
+            game = game.replace(".setgame ", "");
             game = game.replace("{version}", Main.version);
             game = game.replace("{uptime}", BotInfo.getUptime());
             e.getJDA().getPresence().setGame(Game.playing(game));
-            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*.").build());
+            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*.").build()).queue();
         }} else {
-            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** You're not allowed to use this command").build());
+            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** You're not allowed to use this command").build()).queue();
         }
     }
 

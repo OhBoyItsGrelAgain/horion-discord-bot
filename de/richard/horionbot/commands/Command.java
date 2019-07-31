@@ -4,7 +4,9 @@ import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.exceptions.PermissionException;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.core.utils.PermissionUtil;
 
 import java.util.List;
 
@@ -24,7 +26,11 @@ public abstract class Command extends ListenerAdapter
             return;
         if (containsCommand(e.getMessage())) {
             onCommand(e, commandArgs(e.getMessage()));
-            e.getMessage().delete().queue();
+            try {
+                e.getMessage().delete().queue();
+            } catch (PermissionException ex) {
+                System.out.println("Bot is lacking MANAGE_MESSAGES permission");
+            }
         }
     }
 
