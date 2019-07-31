@@ -6,10 +6,17 @@ import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 
 import javax.security.auth.login.LoginException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
+import java.util.Properties;
 
 public class Main
 {
-    public static String version = "0.3";
+    public static String version = "0.4";
 
     public static void main(String[] args)
             throws LoginException, InterruptedException
@@ -28,8 +35,23 @@ public class Main
                 // Register Logger
                 jda.addEventListener(new Logger());
 
+                /*
+                // Load config
+                Properties config = new Properties();
+                InputStream is = null;
+                try {
+                    is = new FileInputStream("config.ini");
+                } catch (FileNotFoundException ex) {
+                    System.out.println("Config file not found!");
+                }
+                try {
+                    config.load(is);
+                } catch (IOException ex) {
+                    System.out.println("Config couldnt be loaded.");
+                } */
+
                 // Set game activity
-                jda.setGame(Game.of(Game.GameType.DEFAULT, "with Horion"));
+                jda.setGame(Game.playing("with Horion"));
 
         JDA bot = jda.build();
         bot.awaitReady();
