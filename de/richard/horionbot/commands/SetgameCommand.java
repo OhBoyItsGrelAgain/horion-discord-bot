@@ -29,7 +29,7 @@ public class SetgameCommand extends Command
             game = game.replace("{version}", Main.version);
             game = game.replace("{uptime}", BotInfo.getUptime());
             e.getJDA().getPresence().setGame(Game.playing(game));
-            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*.").build()).queue();
+            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*").build()).queue();
         }} else {
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** You're not allowed to use this command").build()).queue();
         }
