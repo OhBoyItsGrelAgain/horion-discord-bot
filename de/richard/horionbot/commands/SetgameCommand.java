@@ -62,6 +62,6 @@ public class SetgameCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".setgame - Display the bots ping!");
+        return Arrays.asList(".setgame <game> - Set the game the bot's playing!");
     }
 }

@@ -22,7 +22,7 @@ public class ModuleinfoCommand extends Command
         else {
             switch (args[1].toLowerCase()) {
                 case "killaura":
-                    sendAnswer("Killaura", "Automaticall");
+                    sendAnswer("Killaura", "Automatically attacks entitys around you");
                     break;
                 case "aimbot":
                     sendAnswer("Aimbot", "Automatically aims at the nearest player for you");
