@@ -31,6 +31,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
                 jda.addEventListener(cmd.registerCommand(new GithubCommand()));
                 jda.addEventListener(cmd.registerCommand(new ModuleinfoCommand()));
+                jda.addEventListener(cmd.registerCommand(new SetgameCommand()));
 
                 // Register Logger
                 jda.addEventListener(new Logger());

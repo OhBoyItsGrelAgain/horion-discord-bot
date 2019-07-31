@@ -43,7 +43,7 @@ public class SetgameCommand extends Command
     @Override
     public String getDescription()
     {
-        return "Set the game the bot's playing";
+        return "Set the game the bot's playing (Bot-Owner only)";
     }
 
     @Override
