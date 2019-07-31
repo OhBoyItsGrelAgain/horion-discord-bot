@@ -32,6 +32,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new GithubCommand()));
                 jda.addEventListener(cmd.registerCommand(new ModuleinfoCommand()));
                 jda.addEventListener(cmd.registerCommand(new SetgameCommand()));
+                jda.addEventListener(cmd.registerCommand(new EnchantmentsCommand()));
 
                 // Register Logger
                 jda.addEventListener(new Logger());
