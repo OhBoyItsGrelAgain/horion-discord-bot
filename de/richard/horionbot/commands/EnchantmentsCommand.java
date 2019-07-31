@@ -57,119 +57,120 @@ public class EnchantmentsCommand extends Command
                             "\n Thorns - ID: 5" +
                             "\n Unbreaking - ID: 17")
                     .build();
+            e.getTextChannel().sendMessage(msg).queue();
         }
         else {
             switch (args[1].toLowerCase()) {
                 case "aqua affinity":
-                    sendAnswer("Speeds up how fast you can mine blocks underwater | ID: 8");
+                    sendAnswer("Aqua Affinity", "Speeds up how fast you can mine blocks underwater | ID: 8");
                     break;
                 case "bane of arthropods":
-                    sendAnswer("Increases attack damage against arthropods | ID: 11");
+                    sendAnswer("Bane of Arthropods", "Increases attack damage against arthropods | ID: 11");
                     break;
                 case "blast protection":
-                    sendAnswer("Reduces blast and explosion damage | ID: 3");
+                    sendAnswer("Blast Protection", "Reduces blast and explosion damage | ID: 3");
                     break;
                 case "channeling":
-                    sendAnswer("Summons a lightning bolt at a targeted mob when enchanted item is thrown (targeted mob must be standing in rain) | ID: 32");
+                    sendAnswer("Channeling", "Summons a lightning bolt at a targeted mob when enchanted item is thrown (targeted mob must be standing in rain) | ID: 32");
                     break;
                 case "depth strider":
-                    sendAnswer("Speeds up how fast you can move underwater | ID: 7");
+                    sendAnswer("Depth Strider", "Speeds up how fast you can move underwater | ID: 7");
                     break;
                 case "efficiency":
-                    sendAnswer("Increases how fast you can mine | ID: 15");
+                    sendAnswer("Efficiency", "Increases how fast you can mine | ID: 15");
                     break;
                 case "feather falling":
-                    sendAnswer("Reduces fall and teleportation damage | ID: 2");
+                    sendAnswer("Feather Falling", "Reduces fall and teleportation damage | ID: 2");
                     break;
                 case "fire aspect":
-                    sendAnswer("Sets target on fire | ID: 13");
+                    sendAnswer("Fire Aspect", "Sets target on fire | ID: 13");
                     break;
                 case "fire protection":
-                    sendAnswer("Reduces damage caused by fire and lava | ID: 1");
+                    sendAnswer("Fire Protection", "Reduces damage caused by fire and lava | ID: 1");
                     break;
                 case "flame":
-                    sendAnswer("Turns arrows into flaming arrows | ID: 21");
+                    sendAnswer("Flame", "Turns arrows into flaming arrows | ID: 21");
                     break;
                 case "fortune":
-                    sendAnswer("Increases block drops from mining | ID: 18");
+                    sendAnswer("Fortune", "Increases block drops from mining | ID: 18");
                     break;
                 case "frost walker":
-                    sendAnswer("Freezes water into ice so that you can walk on it | ID: 25");
+                    sendAnswer("Frost Walker", "Freezes water into ice so that you can walk on it | ID: 25");
                     break;
                 case "impaling":
-                    sendAnswer("Increases attack damage against sea creatures | ID: 29");
+                    sendAnswer("Impaling", "Increases attack damage against sea creatures | ID: 29");
                     break;
                 case "infinity":
-                    sendAnswer("Shoots an infinite amount of arrows | ID: 22");
+                    sendAnswer("Infinity", "Shoots an infinite amount of arrows | ID: 22");
                     break;
                 case "knockback":
-                    sendAnswer("Increases knockback dealt (enemies repel backwards) | ID: 12");
+                    sendAnswer("Knockback", "Increases knockback dealt (enemies repel backwards) | ID: 12");
                     break;
                 case "looting":
-                    sendAnswer("Increases amount of loot dropped when mob is killed | ID: 14");
+                    sendAnswer("Looting", "Increases amount of loot dropped when mob is killed | ID: 14");
                     break;
                 case "loyalty":
-                    sendAnswer("Returns your weapon when it is thrown like a spear | ID: 31");
+                    sendAnswer("Loyalty", "Returns your weapon when it is thrown like a spear | ID: 31");
                     break;
                 case "luck of the sea":
-                    sendAnswer("Increases chances of catching valuable items | ID: 23");
+                    sendAnswer("Luck of the Sea", "Increases chances of catching valuable items | ID: 23");
                     break;
                 case "lure":
-                    sendAnswer("Increases the rate of fish biting your hook | ID: 24");
+                    sendAnswer("Lure", "Increases the rate of fish biting your hook | ID: 24");
                     break;
                 case "mending":
-                    sendAnswer("Uses xp to mend your tools, weapons and armor | ID: 26");
+                    sendAnswer("Mending", "Uses xp to mend your tools, weapons and armor | ID: 26");
                     break;
                 case "multishot":
-                    sendAnswer("Shoots 3 arrows at once but only costs 1 arrow (from your inventory) | ID: empty");
+                    sendAnswer("Multishot", "Shoots 3 arrows at once but only costs 1 arrow (from your inventory) | ID: empty");
                     break;
                 case "piercing":
-                    sendAnswer("Arrow can pierce through multiple entities | ID: empty");
+                    sendAnswer("Piercing", "Arrow can pierce through multiple entities | ID: empty");
                     break;
                 case "power":
-                    sendAnswer("Increases damage dealt by bow | ID: 19");
+                    sendAnswer("Power", "Increases damage dealt by bow | ID: 19");
                     break;
                 case "projectile protection":
-                    sendAnswer("Reduces projectile damage (arrows, fireballs, fire charges) | ID: 4");
+                    sendAnswer("Projectile Protection", "Reduces projectile damage (arrows, fireballs, fire charges) | ID: 4");
                     break;
                 case "protection":
-                    sendAnswer("General protection against attacks, fire, lava, and falling | ID: 0");
+                    sendAnswer("Protection", "General protection against attacks, fire, lava, and falling | ID: 0");
                     break;
                 case "punch":
-                    sendAnswer("General protection against attacks, fire, lava, and falling | ID: 20");
+                    sendAnswer("Punch", "General protection against attacks, fire, lava, and falling | ID: 20");
                     break;
                 case "quick charge":
-                    sendAnswer("Reduces the amount of time to reload a crossbow | ID: empty");
+                    sendAnswer("Quick Charge", "Reduces the amount of time to reload a crossbow | ID: empty");
                     break;
                 case "respiration":
-                    sendAnswer("Extends underwater breathing (see better underwater) | ID: 6");
+                    sendAnswer("Respiration", "Extends underwater breathing (see better underwater) | ID: 6");
                     break;
                 case "riptide":
-                    sendAnswer("Propels the player forward when enchanted item is thrown while in water or rain | ID: 30");
+                    sendAnswer("Riptide", "Propels the player forward when enchanted item is thrown while in water or rain | ID: 30");
                     break;
                 case "sharpness":
-                    sendAnswer("Increases attack damage dealt to mobs | ID: 9");
+                    sendAnswer("Sharpness", "Increases attack damage dealt to mobs | ID: 9");
                     break;
                 case "silk touch":
-                    sendAnswer("Mines blocks themselves (fragile items) | ID: 16");
+                    sendAnswer("Silk Touch", "Mines blocks themselves (fragile items) | ID: 16");
                     break;
                 case "smite":
-                    sendAnswer("Increases attack damage against undead mobs | ID: 10");
+                    sendAnswer("Smite", "Increases attack damage against undead mobs | ID: 10");
                     break;
                 case "thorns":
-                    sendAnswer("\tCauses damage to attackers | ID: 5");
+                    sendAnswer( "Thorns", "Causes damage to attackers | ID: 5");
                     break;
                 case "unbreaking":
-                    sendAnswer("Increases durability of item | ID: 17");
+                    sendAnswer("Unbreaking", "Increases durability of item | ID: 17");
                     break;
                 default:
-                    sendAnswer("**Error:** Enchantment not found");
+                    sendAnswer("Error", "Enchantment not found");
             }
         }
     }
 
-    private void sendAnswer(String message) {
-        MessageEmbed msg = new EmbedBuilder().setDescription(message).setColor(new Color(0x4D95E9)).build();
+    private void sendAnswer(String name, String description) {
+        MessageEmbed msg = new EmbedBuilder().setDescription(description).setTitle(name).setColor(new Color(0x4D95E9)).build();
         channel.sendMessage(msg).queue();
     }
 
