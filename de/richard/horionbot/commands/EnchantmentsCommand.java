@@ -1,15 +1,15 @@
 package de.richard.horionbot.commands;
 
-import de.richard.horionbot.Main;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class EnchantmentsCommand extends Command
 {
@@ -57,7 +57,8 @@ public class EnchantmentsCommand extends Command
                             "\n Thorns - ID: 5" +
                             "\n Unbreaking - ID: 17")
                     .build();
-            e.getTextChannel().sendMessage(msg).queue();
+            e.getTextChannel().sendMessage(msg).queue( (m) -> m.delete().queueAfter(60, TimeUnit.SECONDS));
+            e.getMessage().delete().queueAfter(1, TimeUnit.MINUTES);
         }
         else {
             switch (args[1].toLowerCase()) {
@@ -177,7 +178,7 @@ public class EnchantmentsCommand extends Command
     @Override
     public List<String> getAliases()
     {
-        return Arrays.asList(".enchantments", ".enchantment", "enchantmentlist");
+        return Arrays.asList(".enchantments", ".enchantment", "enchantmentlist", ".enchant", ".enchants");
     }
 
     @Override

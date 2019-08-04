@@ -1,22 +1,17 @@
 package de.richard.horionbot;
 
 import de.richard.horionbot.commands.*;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 
 import javax.security.auth.login.LoginException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
-import java.util.Properties;
 
 public class Main
 {
-    public static String version = "0.4";
+    public static String version = "0.5";
 
     public static void main(String[] args)
             throws LoginException, InterruptedException
@@ -25,39 +20,35 @@ public class Main
 
                 // Add Commands
                 HelpCommand cmd = new HelpCommand();
-                jda.addEventListener(cmd.registerCommand(cmd));
-                jda.addEventListener(cmd.registerCommand(new InfoCommand()));
-                jda.addEventListener(cmd.registerCommand(new PingCommand()));
-                jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
-                jda.addEventListener(cmd.registerCommand(new GithubCommand()));
-                jda.addEventListener(cmd.registerCommand(new ModuleinfoCommand()));
-                jda.addEventListener(cmd.registerCommand(new SetgameCommand()));
-                jda.addEventListener(cmd.registerCommand(new EnchantmentsCommand()));
+                jda.addEventListeners(cmd.registerCommand(cmd));
+                jda.addEventListeners(cmd.registerCommand(new InfoCommand()));
+                jda.addEventListeners(cmd.registerCommand(new PingCommand()));
+                jda.addEventListeners(cmd.registerCommand(new TroubleshootingCommand()));
+                jda.addEventListeners(cmd.registerCommand(new GithubCommand()));
+                jda.addEventListeners(cmd.registerCommand(new ModuleinfoCommand()));
+                jda.addEventListeners(cmd.registerCommand(new SetgameCommand()));
+                jda.addEventListeners(cmd.registerCommand(new EnchantmentsCommand()));
 
                 // Register Logger
-                jda.addEventListener(new Logger());
-
-                /*
-                // Load config
-                Properties config = new Properties();
-                InputStream is = null;
-                try {
-                    is = new FileInputStream("config.ini");
-                } catch (FileNotFoundException ex) {
-                    System.out.println("Config file not found!");
-                }
-                try {
-                    config.load(is);
-                } catch (IOException ex) {
-                    System.out.println("Config couldnt be loaded.");
-                } */
+                jda.addEventListeners(new Logger());
 
                 // Set game activity
-                jda.setGame(Game.playing("with Horion"));
+                jda.setActivity(Activity.playing("Minecraft | v" + version));
 
         JDA bot = jda.build();
         bot.awaitReady();
         bot.setAutoReconnect(true);
+
+        File config = new File("config.ini");
+        if(!config.exists()) {
+            try {
+                config.createNewFile();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+
     }
 
 }
