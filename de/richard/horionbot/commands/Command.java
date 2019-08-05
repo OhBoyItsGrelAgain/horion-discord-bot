@@ -1,5 +1,6 @@
 package de.richard.horionbot.commands;
 
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
@@ -8,6 +9,7 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public abstract class Command extends ListenerAdapter
 {
@@ -24,6 +26,10 @@ public abstract class Command extends ListenerAdapter
         if (e.getAuthor().isBot() && !respondToBots())
             return;
         if (containsCommand(e.getMessage())) {
+            if(!e.getTextChannel().getId().equalsIgnoreCase("607947857831657502") && onlyCommandsChannel()) {
+                e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Commands may only be executed in <#607947857831657502>").build()).queue((m) -> m.delete().submitAfter(10, TimeUnit.SECONDS));
+                return;
+            }
             onCommand(e, commandArgs(e.getMessage()));
             try {
                 e.getMessage().delete().submit();
@@ -63,6 +69,10 @@ public abstract class Command extends ListenerAdapter
 
     protected boolean respondToBots()
     {
+        return false;
+    }
+
+    protected boolean onlyCommandsChannel() {
         return false;
     }
 }
