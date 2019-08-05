@@ -1,9 +1,9 @@
 package de.richard.horionbot;
 
 import de.richard.horionbot.commands.*;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
@@ -20,20 +20,20 @@ public class Main
 
                 // Add Commands
                 HelpCommand cmd = new HelpCommand();
-                jda.addEventListeners(cmd.registerCommand(cmd));
-                jda.addEventListeners(cmd.registerCommand(new InfoCommand()));
-                jda.addEventListeners(cmd.registerCommand(new PingCommand()));
-                jda.addEventListeners(cmd.registerCommand(new TroubleshootingCommand()));
-                jda.addEventListeners(cmd.registerCommand(new GithubCommand()));
-                jda.addEventListeners(cmd.registerCommand(new ModuleinfoCommand()));
-                jda.addEventListeners(cmd.registerCommand(new SetgameCommand()));
-                jda.addEventListeners(cmd.registerCommand(new EnchantmentsCommand()));
+                jda.addEventListener(cmd.registerCommand(cmd));
+                jda.addEventListener(cmd.registerCommand(new InfoCommand()));
+                jda.addEventListener(cmd.registerCommand(new PingCommand()));
+                jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
+                jda.addEventListener(cmd.registerCommand(new GithubCommand()));
+                jda.addEventListener(cmd.registerCommand(new ModuleinfoCommand()));
+                jda.addEventListener(cmd.registerCommand(new SetgameCommand()));
+                jda.addEventListener(cmd.registerCommand(new EnchantmentsCommand()));
 
                 // Register Logger
-                jda.addEventListeners(new Logger());
+                jda.addEventListener(new Logger());
 
                 // Set game activity
-                jda.setActivity(Activity.playing("Minecraft | v" + version));
+                jda.setGame(Game.playing("Minecraft | v" + version));
 
         JDA bot = jda.build();
         bot.awaitReady();

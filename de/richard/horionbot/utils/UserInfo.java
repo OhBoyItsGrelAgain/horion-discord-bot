@@ -1,6 +1,6 @@
 package de.richard.horionbot.utils;
 
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.core.entities.User;
 
 import java.awt.*;
 import java.util.Arrays;

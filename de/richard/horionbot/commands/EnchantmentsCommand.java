@@ -1,10 +1,10 @@
 package de.richard.horionbot.commands;
 
 
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -58,7 +58,6 @@ public class EnchantmentsCommand extends Command
                             "\n Unbreaking - ID: 17")
                     .build();
             e.getTextChannel().sendMessage(msg).queue( (m) -> m.delete().queueAfter(60, TimeUnit.SECONDS));
-            e.getMessage().delete().queueAfter(1, TimeUnit.MINUTES);
         }
         else {
             switch (args[1].toLowerCase()) {
