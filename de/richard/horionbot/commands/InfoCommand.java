@@ -8,6 +8,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class InfoCommand extends Command
 {
@@ -23,7 +24,7 @@ public class InfoCommand extends Command
                 .addField("Github", "https://github.com/richardletshacks/horion-discord-bot", false)
                 .setFooter("Made by Richard, with help of the Java-Discord-API (JDA)", "https://files.catbox.moe/y690bs.png")
                 .build();
-        e.getTextChannel().sendMessage(msg).queue();
+        e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
     }
 
     @Override

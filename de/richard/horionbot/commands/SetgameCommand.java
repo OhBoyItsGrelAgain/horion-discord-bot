@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SetgameCommand extends Command
 {
@@ -17,7 +18,7 @@ public class SetgameCommand extends Command
     {
         if(UserInfo.isBotAdmin(e.getAuthor())) {
         if(args.length < 2) {
-            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** Please specify a game").build()).queue();
+            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** Please specify a game").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         } else {
             String game = "";
             for (int x = 0;  x < args.length; x++) {
@@ -27,9 +28,9 @@ public class SetgameCommand extends Command
             game = game.replace("{version}", Main.version);
             game = game.replace("{uptime}", BotInfo.getUptime());
             e.getJDA().getPresence().setGame(Game.playing(game));
-            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*").build()).queue();
+            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }} else {
-            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** You're not allowed to use this command").build()).queue();
+            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** You're not allowed to use this command").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }
     }
 

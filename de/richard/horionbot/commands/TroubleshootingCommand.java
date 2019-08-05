@@ -5,7 +5,6 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.utils.PermissionUtil;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -37,7 +36,7 @@ public class TroubleshootingCommand extends Command
         if (mentioned.size() > 0) {
                 if(e.getMessage().getMember().hasPermission(Permission.MESSAGE_MANAGE)) {
                     mentioned.get(0).openPrivateChannel().complete().sendMessage(msg).queue();
-                    e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Troubleshooting-Message successfully sent to " + mentioned.get(0).getAsMention()).build()).queue();
+                    e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Troubleshooting-Message successfully sent to " + mentioned.get(0).getAsMention()).build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
                 } else {
                     e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
                 }

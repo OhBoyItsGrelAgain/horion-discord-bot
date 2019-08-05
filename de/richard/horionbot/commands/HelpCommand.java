@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 public class HelpCommand extends Command
 {
@@ -40,7 +41,7 @@ public class HelpCommand extends Command
             e.getTextChannel().sendMessage(new EmbedBuilder()
                     .setColor(new Color(0x4D95E9))
                     .setTitle(e.getAuthor().getName() + ": Help was sent to you as private message.")
-                    .build()).queue();
+                    .build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }
         sendPrivate(e.getAuthor().openPrivateChannel().complete(), args);
     }

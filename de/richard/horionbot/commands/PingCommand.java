@@ -6,6 +6,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class PingCommand extends Command
 {
@@ -16,7 +17,7 @@ public class PingCommand extends Command
         Color color = Color.RED;
         if(ping < 100) color = Color.ORANGE;
         if(ping < 20) color = Color.GREEN;
-        e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Ping:** " + ping + " ms").setColor(color).build()).queue();
+        e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Ping:** " + ping + " ms").setColor(color).build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
     }
 
     @Override
