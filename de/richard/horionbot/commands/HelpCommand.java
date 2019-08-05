@@ -7,7 +7,7 @@ import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.commons.lang3.StringUtils;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

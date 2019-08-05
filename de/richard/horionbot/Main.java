@@ -39,16 +39,6 @@ public class Main
         bot.awaitReady();
         bot.setAutoReconnect(true);
 
-        File config = new File("config.ini");
-        if(!config.exists()) {
-            try {
-                config.createNewFile();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-
-        }
-
     }
 
 }

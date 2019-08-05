@@ -2,7 +2,7 @@ package de.richard.horionbot.utils;
 
 import net.dv8tion.jda.core.entities.User;
 
-import java.awt.*;
+import java.awt.Image;
 import java.util.Arrays;
 import java.util.List;
 
