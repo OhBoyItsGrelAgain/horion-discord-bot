@@ -57,7 +57,7 @@ public class EnchantmentsCommand extends Command
                             "\n Thorns - ID: 5" +
                             "\n Unbreaking - ID: 17")
                     .build();
-            e.getTextChannel().sendMessage(msg).queue( (m) -> m.delete().queueAfter(60, TimeUnit.SECONDS));
+            e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }
         else {
             switch (args[1].toLowerCase()) {
@@ -171,7 +171,7 @@ public class EnchantmentsCommand extends Command
 
     private void sendAnswer(String name, String description) {
         MessageEmbed msg = new EmbedBuilder().setDescription(description).setTitle(name).setColor(new Color(0x4D95E9)).build();
-        channel.sendMessage(msg).queue();
+        channel.sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
     }
 
     @Override

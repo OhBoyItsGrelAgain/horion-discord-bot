@@ -8,6 +8,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ModuleinfoCommand extends Command
 {
@@ -148,7 +149,7 @@ public class ModuleinfoCommand extends Command
 
     private void sendAnswer(String name, String description) {
         MessageEmbed msg = new EmbedBuilder().setDescription(description).setTitle(name).setColor(new Color(0x4D95E9)).build();
-        channel.sendMessage(msg).queue();
+        channel.sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
     }
 
     @Override

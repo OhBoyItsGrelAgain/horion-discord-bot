@@ -1,18 +1,21 @@
 package de.richard.horionbot.commands;
 
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.utils.PermissionUtil;
 
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TroubleshootingCommand extends Command
 {
     @Override
-    public void onCommand(MessageReceivedEvent e, String[] args)
-    {
+    public void onCommand(MessageReceivedEvent e, String[] args) {
         MessageEmbed msg = new EmbedBuilder()
                 .setColor(new Color(0x4D95E9))
                 .setTitle("**Troubleshooting**")
@@ -29,9 +32,18 @@ public class TroubleshootingCommand extends Command
                         "- Set the right permissions (Needed cause Minecraft is an UWP app)\n" +
                         "- Use another injector such as [Cheat Engines](https://www.cheatengine.org/) or [Extreme Injector](https://bit.ly/2LhTEwd)\n", false)
                 .addField("Cheat Engine errors", "If your error looks similar to [this](https://gyazo.com/ba06bc955a258b3c5406f67a30b4f37b), download [this](https://www.microsoft.com/en-us/download/details.aspx?id=53840) runtime and re-inject afterwards", false)
-
                 .build();
-        e.getTextChannel().sendMessage(msg).queue();
+        List<User> mentioned = e.getMessage().getMentionedUsers();
+        if (mentioned.size() > 0) {
+                if(e.getMessage().getMember().hasPermission(Permission.MESSAGE_MANAGE)) {
+                    mentioned.get(0).openPrivateChannel().complete().sendMessage(msg).queue();
+                    e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Troubleshooting-Message successfully sent to " + mentioned.get(0).getAsMention()).build()).queue();
+                } else {
+                    e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
+                }
+        } else {
+            e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
+        }
     }
 
     @Override
