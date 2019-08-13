@@ -63,7 +63,7 @@ public class Suggestions extends ListenerAdapter {
         }
         return true;
     }
-    public static boolean acceptSuggestion(String SuggestionID) {
+    public static boolean acceptSuggestion(String SuggestionID, User accepter) {
             try {
                 InputStream is = new FileInputStream("suggestions/" + SuggestionID + ".xml");
                 try {
@@ -72,6 +72,7 @@ public class Suggestions extends ListenerAdapter {
                     String authorID = prop.getProperty("authorID");
                     String title = prop.getProperty("title");
                     String description = prop.getProperty("description");
+                    User author = Main.bot.getUserById(prop.getProperty("authorID"));
                     MessageEmbed suggestion = new EmbedBuilder()
                             .setColor(new Color(0x4D95E9))
                             .setTitle(title)
@@ -81,6 +82,11 @@ public class Suggestions extends ListenerAdapter {
                     acceptedSuggestionsChannel.sendMessage(suggestion).queue((m) -> {
                         m.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("accept", true).get(0)).queue();
                     });
+                    author.openPrivateChannel().complete().sendMessage(new EmbedBuilder()
+                            .setColor(new Color(0x4D95E9))
+                            .setTitle("Congrats! Your suggestion just got accepted!")
+                            .setDescription("Your suggestion \"" + title + "\" was accepted by " + accepter.getAsMention() + ". Now just wait to get it implemented!")
+                            .build()).queue();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

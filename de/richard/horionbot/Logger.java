@@ -43,7 +43,7 @@ public class Logger extends ListenerAdapter {
             SuggestionID = SuggestionID.substring(0, 36);
             if(e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
                 if(e.getReactionEmote().getName().contains("accept")) {
-                    acceptSuggestion(SuggestionID);
+                    acceptSuggestion(SuggestionID, e.getUser());
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
                 } else if(e.getReactionEmote().getName().contains("deny")) {
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
