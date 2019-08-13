@@ -1,6 +1,7 @@
 package de.richard.horionbot;
 
 import de.richard.horionbot.commands.*;
+import de.richard.horionbot.utils.Suggestions;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
@@ -10,6 +11,7 @@ import javax.security.auth.login.LoginException;
 public class Main
 {
     public static String version = "0.5";
+    public static JDA bot;
 
     public static void main(String[] args)
             throws LoginException, InterruptedException
@@ -27,6 +29,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new SetgameCommand()));
                 jda.addEventListener(cmd.registerCommand(new EnchantmentsCommand()));
                 // jda.addEventListener(cmd.registerCommand(new BruhCommand()));
+                jda.addEventListener(cmd.registerCommand(new SuggestionCommand()));
 
                 // Register Logger
                 jda.addEventListener(new Logger());
@@ -34,10 +37,8 @@ public class Main
                 // Set game activity
                 jda.setGame(Game.playing("Minecraft | v" + version));
 
-        JDA bot = jda.build();
+        bot = jda.build();
         bot.awaitReady();
         bot.setAutoReconnect(true);
-
     }
-
 }
