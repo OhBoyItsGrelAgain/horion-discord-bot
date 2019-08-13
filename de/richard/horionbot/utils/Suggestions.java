@@ -78,7 +78,9 @@ public class Suggestions extends ListenerAdapter {
                             .setDescription(description)
                             .setFooter("SuggestionID: " + SuggestionID + " | Suggested by " + SuggestionChannel.getGuild().getMemberById(authorID).getUser().getAsTag(), "https://files.catbox.moe/g9w833.png")
                             .build();
-                    acceptedSuggestionsChannel.sendMessage(suggestion).queue();
+                    acceptedSuggestionsChannel.sendMessage(suggestion).queue((m) -> {
+                        m.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("accept", true).get(0)).queue();
+                    });
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -86,5 +88,9 @@ public class Suggestions extends ListenerAdapter {
                 throw new RuntimeException(ex);
             }
             return true;
+    }
+
+    public static boolean finishSuggestion(String SuggestionID) {
+        return true;
     }
 }
