@@ -26,6 +26,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new ModuleinfoCommand()));
                 jda.addEventListener(cmd.registerCommand(new SetgameCommand()));
                 jda.addEventListener(cmd.registerCommand(new EnchantmentsCommand()));
+                // jda.addEventListener(cmd.registerCommand(new BruhCommand()));
 
                 // Register Logger
                 jda.addEventListener(new Logger());

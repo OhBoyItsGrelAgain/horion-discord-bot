@@ -1,5 +1,6 @@
 package de.richard.horionbot.commands;
 
+import de.richard.horionbot.utils.UserInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -34,7 +35,7 @@ public class TroubleshootingCommand extends Command
                 .build();
         List<User> mentioned = e.getMessage().getMentionedUsers();
         if (mentioned.size() > 0) {
-                if(e.getMessage().getMember().hasPermission(Permission.MESSAGE_MANAGE)) {
+                if(e.getMessage().getMember().hasPermission(Permission.MESSAGE_MANAGE) || UserInfo.isBotAdmin(e.getAuthor())) {
                     mentioned.get(0).openPrivateChannel().complete().sendMessage(msg).queue();
                     e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Troubleshooting-Message successfully sent to " + mentioned.get(0).getAsMention()).build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
                 } else {
