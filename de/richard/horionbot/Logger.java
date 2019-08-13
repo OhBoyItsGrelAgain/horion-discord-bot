@@ -7,6 +7,8 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.util.regex.Pattern;
+
 import static de.richard.horionbot.utils.Suggestions.acceptSuggestion;
 
 public class Logger extends ListenerAdapter {
@@ -31,7 +33,8 @@ public class Logger extends ListenerAdapter {
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
         if (e.getTextChannel().equals(Suggestions.SuggestionChannel)) {
             Message Message = Suggestions.SuggestionChannel.getMessageById(e.getMessageId()).complete();
-            String SuggestionID = Message.getEmbeds().get(0).getFooter().getText().replace("SuggestionID: ", "");
+            String SuggestionID = Message.getEmbeds().get(0).getFooter().getText().substring(14);
+            SuggestionID = SuggestionID.substring(0, 36);
             if(e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
                 if(e.getReactionEmote().getName().contains("accept")) {
                     acceptSuggestion(SuggestionID);
@@ -39,8 +42,6 @@ public class Logger extends ListenerAdapter {
                 } else if(e.getReactionEmote().getName().contains("deny")) {
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
                 }
-            } else {
-                if(!e.getUser().getId().equals("605822602400890903")) e.getReaction().removeReaction(e.getUser()).queue();
             }
         }
     }
