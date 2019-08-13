@@ -16,8 +16,8 @@ import java.util.function.Consumer;
 
 public class Suggestions extends ListenerAdapter {
 
-    public static TextChannel SuggestionChannel = Main.bot.getGuildById("503336354546057218").getTextChannelById("606459303389298731");
-    public static TextChannel acceptedSuggestionsChannel = Main.bot.getGuildById("503336354546057218").getTextChannelById("610775410413666315");
+    public static TextChannel SuggestionChannel = Main.bot.getGuildById("605086182560235569").getTextChannelById("606280173075038219");
+    public static TextChannel acceptedSuggestionsChannel = Main.bot.getGuildById("605086182560235569").getTextChannelById("610834071966187539");
 
     public static boolean addSuggestion(String title, String description) {
         String SuggestionID = UUID.randomUUID().toString();
