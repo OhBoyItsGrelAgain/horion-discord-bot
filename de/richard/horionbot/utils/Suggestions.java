@@ -109,6 +109,8 @@ public class Suggestions extends ListenerAdapter {
                         .setTitle("I'm sorry, but your suggestion got denied!")
                         .setDescription("Your suggestion \"" + title + "\" was denied by " + denier.getAsMention() + ". Maybe you're lucky next time :(")
                         .build()).queue();
+                File save = new File("suggestion/" + SuggestionID + ".xml");
+                save.delete();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
