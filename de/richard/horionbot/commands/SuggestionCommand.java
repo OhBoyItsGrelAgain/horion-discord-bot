@@ -1,10 +1,12 @@
 package de.richard.horionbot.commands;
 
 import de.richard.horionbot.utils.Suggestions;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SuggestionCommand extends Command
 {
@@ -21,7 +23,7 @@ public class SuggestionCommand extends Command
             String description = parts[1];
             Suggestions.addSuggestion(title.substring(1), description);
         } else {
-            e.getTextChannel().sendMessage("Wrong syntax").queue();
+            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Wrong Syntax! Please use *.suggest <title>|<description>*").build()).queue((m) -> m.delete().queueAfter(60, TimeUnit.SECONDS));
         }
     }
 

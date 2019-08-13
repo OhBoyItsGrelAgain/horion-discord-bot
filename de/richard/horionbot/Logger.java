@@ -29,7 +29,6 @@ public class Logger extends ListenerAdapter {
 
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
-        System.out.println("Called Event: onMessageReactionAdd");
         if (e.getTextChannel().equals(Suggestions.SuggestionChannel)) {
             Message Message = Suggestions.SuggestionChannel.getMessageById(e.getMessageId()).complete();
             String SuggestionID = Message.getEmbeds().get(0).getFooter().getText().replace("SuggestionID: ", "");
@@ -41,7 +40,7 @@ public class Logger extends ListenerAdapter {
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
                 }
             } else {
-                if(!e.getUser().getId().equals("605822602400890903")) e.getReaction().removeReaction().queue();
+                if(!e.getUser().getId().equals("605822602400890903")) e.getReaction().removeReaction(e.getUser()).queue();
             }
         }
     }

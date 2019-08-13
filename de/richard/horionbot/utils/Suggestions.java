@@ -39,20 +39,21 @@ public class Suggestions extends ListenerAdapter {
         try {
             OutputStream os = new FileOutputStream("suggestions/" + SuggestionID + ".xml");
             Properties prop = new Properties();
-            AtomicReference<String> messageid = new AtomicReference<>();
+            AtomicReference<Message> messagear = new AtomicReference<>();
+            Consumer<Message> callback = (message) -> {
+                messagear.set(message);
+                message.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("accept", true).get(0)).queue();
+                message.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("deny", true).get(0)).queue();
+            };
             MessageEmbed suggestion = new EmbedBuilder()
                     .setColor(new Color(0x4D95E9))
                     .setTitle(title)
                     .setDescription(description)
-                    .setFooter("SuggestionID: " + SuggestionID, "https://files.catbox.moe/g9w833.png")
+                    .setFooter("SuggestionID: " + SuggestionID + "| Suggested by " + messagear.get().getAuthor().getAsMention(), "https://files.catbox.moe/g9w833.png")
                     .build();
-            Consumer<Message> callback = (message) -> {
-                messageid.set(message.getId());
-                message.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("accept", true).get(0)).queue();
-                message.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("deny", true).get(0)).queue();
-            };
             SuggestionChannel.sendMessage(suggestion).queue(callback);
-            prop.setProperty("messageID", messageid.toString());
+            prop.setProperty("messageID", messagear.get().getId());
+            prop.setProperty("author", messagear.get().getAuthor().getAsTag());
             prop.setProperty("title", title);
             prop.setProperty("description", description);
             try {
