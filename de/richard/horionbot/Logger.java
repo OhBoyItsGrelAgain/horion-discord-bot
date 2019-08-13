@@ -14,8 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
 
-import static de.richard.horionbot.utils.Suggestions.acceptSuggestion;
-import static de.richard.horionbot.utils.Suggestions.finishSuggestion;
+import static de.richard.horionbot.utils.Suggestions.*;
 
 public class Logger extends ListenerAdapter {
 
@@ -46,6 +45,7 @@ public class Logger extends ListenerAdapter {
                     acceptSuggestion(SuggestionID, e.getUser());
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
                 } else if(e.getReactionEmote().getName().contains("deny")) {
+                    denySuggestion(SuggestionID, e.getUser());
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
                 }
             }

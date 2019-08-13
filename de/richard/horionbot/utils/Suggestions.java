@@ -96,7 +96,25 @@ public class Suggestions extends ListenerAdapter {
             return true;
     }
 
-    public static boolean finishSuggestion(String SuggestionID) {
+    public static boolean denySuggestion(String SuggestionID, User denier) {
+        try {
+            InputStream is = new FileInputStream("suggestions/" + SuggestionID + ".xml");
+            try {
+                Properties prop = new Properties();
+                prop.loadFromXML(is);
+                String title = prop.getProperty("title");
+                User author = Main.bot.getUserById(prop.getProperty("authorID"));
+                author.openPrivateChannel().complete().sendMessage(new EmbedBuilder()
+                        .setColor(new Color(0x4D95E9))
+                        .setTitle("I'm sorry, but your suggestion got denied!")
+                        .setDescription("Your suggestion \"" + title + "\" was denied by " + denier.getAsMention() + ". Maybe you're lucky next time :(")
+                        .build()).queue();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
         return true;
     }
 }
