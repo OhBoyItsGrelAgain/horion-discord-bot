@@ -33,7 +33,7 @@ public class Logger extends ListenerAdapter {
         if (e.getTextChannel().equals(Suggestions.SuggestionChannel)) {
             Message Message = Suggestions.SuggestionChannel.getMessageById(e.getMessageId()).complete();
             String SuggestionID = Message.getEmbeds().get(0).getFooter().getText().replace("SuggestionID: ", "");
-            if(e.getMember().hasPermission(Permission.MESSAGE_MANAGE) && !e.getUser().isBot()) {
+            if(e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
                 if(e.getReactionEmote().getName().contains("accept")) {
                     acceptSuggestion(SuggestionID);
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
