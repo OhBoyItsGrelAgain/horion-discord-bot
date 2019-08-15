@@ -10,13 +10,17 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Properties;
 import java.util.regex.Pattern;
 
 import static de.richard.horionbot.utils.Suggestions.*;
 
-public class Logger extends ListenerAdapter {
+public class Listener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
@@ -40,14 +44,35 @@ public class Logger extends ListenerAdapter {
             Message Message = Suggestions.SuggestionChannel.getMessageById(e.getMessageId()).complete();
             String SuggestionID = Message.getEmbeds().get(0).getFooter().getText().substring(14);
             SuggestionID = SuggestionID.substring(0, 36);
+            String authorID;
+            try{
+                Properties prop = new Properties();
+                InputStream is = new FileInputStream("suggestions/" + SuggestionID + ".xml");
+                prop.loadFromXML(is);
+                authorID = prop.getProperty("authorID");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             if(e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
                 if(e.getReactionEmote().getName().contains("accept")) {
-                    acceptSuggestion(SuggestionID, e.getUser());
+                    try {
+                        acceptSuggestion(SuggestionID, e.getUser());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
                 } else if(e.getReactionEmote().getName().contains("deny")) {
-                    denySuggestion(SuggestionID, e.getUser());
+                    try {
+                        denySuggestion(SuggestionID, e.getUser());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
                 }
+            } else if(e.getUser().getId().equals(authorID) && e.getReactionEmote().getName().contains("deny")) {
+                e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
+                File save = new File("suggestion/" + SuggestionID + ".xml");
+                save.delete();
             }
         }
         if (e.getTextChannel().equals(Suggestions.acceptedSuggestionsChannel)) {

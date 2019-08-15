@@ -12,18 +12,22 @@ public class SuggestionCommand extends Command
 {
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args) {
-        String full = "";
-        for(int x = 0; x < args.length; x++) {
-            full = full + " " + args[x];
-        }
-        full = full.substring(9);
-        if(full.contains("|")) {
-            String[] parts = full.split("\\|");
-            String title = parts[0];
-            String description = parts[1];
-            Suggestions.addSuggestion(title.substring(1), description, e.getAuthor());
+        if(Suggestions.suggestionsEnabled) {
+            String full = "";
+            for (int x = 0; x < args.length; x++) {
+                full = full + " " + args[x];
+            }
+            full = full.substring(9);
+            if (full.contains("|")) {
+                String[] parts = full.split("\\|");
+                String title = parts[0];
+                String description = parts[1];
+                Suggestions.addSuggestion(title.substring(1), description, e.getAuthor());
+            } else {
+                e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Wrong Syntax! Please use *.suggest <title>|<description>*").build()).queue((m) -> m.delete().queueAfter(60, TimeUnit.SECONDS));
+            }
         } else {
-            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Wrong Syntax! Please use *.suggest <title>|<description>*").build()).queue((m) -> m.delete().queueAfter(60, TimeUnit.SECONDS));
+            e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Suggestions are currently disabled. You can no longer add new suggestions.").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }
     }
 
