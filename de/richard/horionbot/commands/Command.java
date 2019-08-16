@@ -26,10 +26,6 @@ public abstract class Command extends ListenerAdapter
         if (e.getAuthor().isBot() && !respondToBots())
             return;
         if (containsCommand(e.getMessage())) {
-            if(!e.getTextChannel().getId().equalsIgnoreCase("607947857831657502") && onlyCommandsChannel()) {
-                e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Commands may only be executed in <#607947857831657502>").build()).queue((m) -> m.delete().submitAfter(10, TimeUnit.SECONDS));
-                return;
-            }
             onCommand(e, commandArgs(e.getMessage()));
             try {
                 e.getMessage().delete().submit();
@@ -69,10 +65,6 @@ public abstract class Command extends ListenerAdapter
 
     protected boolean respondToBots()
     {
-        return false;
-    }
-
-    protected boolean onlyCommandsChannel() {
         return false;
     }
 }

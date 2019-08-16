@@ -11,7 +11,7 @@ import javax.security.auth.login.LoginException;
 
 public class Main
 {
-    public static String version = "0.7";
+    public static String version = "0.8";
     public static JDA bot;
 
     public static void main(String[] args)
