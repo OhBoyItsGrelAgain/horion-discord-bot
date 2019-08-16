@@ -1,7 +1,6 @@
 package de.richard.horionbot;
 
 import de.richard.horionbot.commands.*;
-import de.richard.horionbot.utils.Logger;
 import de.richard.horionbot.utils.Suggestions;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -32,11 +31,8 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new SuggestionCommand()));
                 jda.addEventListener(cmd.registerCommand(new TogglesuggestionsCommand()));
 
-                // Register Suggestions
-                jda.addEventListener(new Suggestions());
-
-                // Register Logger
-                jda.addEventListener(new Logger());
+                // Register EventListener
+                jda.addEventListener(new EventListener());
 
                 // Set game activity
                 jda.setGame(Game.playing("Minecraft | v" + version));
