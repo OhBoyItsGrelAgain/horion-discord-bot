@@ -5,14 +5,14 @@ import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ModuleinfoCommand extends Command
 {
-    TextChannel channel;
+    private TextChannel channel;
 
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args) {
@@ -32,6 +32,9 @@ public class ModuleinfoCommand extends Command
                     break;
                 case "bowaimbot":
                     sendAnswer("BowAimbot", "Automatically aims at the nearest player for you");
+                    break;
+                case "infinitereach":
+                    sendAnswer("InfiniteReach", "Killaura with infinite reach. May not work on some servers, uses an exploit.");
                     break;
                 case "hitbox":
                     sendAnswer("Hitbox", "Resize the hitbox of entitys");
@@ -111,6 +114,9 @@ public class ModuleinfoCommand extends Command
                 case "fastladder":
                     sendAnswer("FastLadder", "Climb ladders faster");
                     break;
+                case "jesus":
+                    sendAnswer("Jesus", "Move faster through water.");
+                    break;
                 case "scaffold":
                     sendAnswer("Scaffold", "Places blocks beneath you as you walk");
                     break;
@@ -140,6 +146,12 @@ public class ModuleinfoCommand extends Command
                     break;
                 case "cheststealer":
                     sendAnswer("ChestStealer", "Automatically takes all items out of a chest");
+                    break;
+                case "stackableitem":
+                    sendAnswer("StackableItem", "Stack items you normally wouldnt be able to stack");
+                    break;
+                case "fasteat":
+                    sendAnswer("FastEat", "Consume food faster");
                     break;
                 default:
                     sendAnswer("Module not found", "Did you put the correct name?");

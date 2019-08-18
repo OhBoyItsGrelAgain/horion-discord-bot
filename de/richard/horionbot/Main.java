@@ -1,7 +1,6 @@
 package de.richard.horionbot;
 
 import de.richard.horionbot.commands.*;
-import de.richard.horionbot.utils.Suggestions;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
@@ -10,7 +9,7 @@ import javax.security.auth.login.LoginException;
 
 public class Main
 {
-    public static String version = "0.8";
+    public static String version = "1.1";
     public static JDA bot;
 
     public static void main(String[] args)
