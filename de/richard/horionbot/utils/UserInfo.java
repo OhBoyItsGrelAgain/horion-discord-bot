@@ -2,7 +2,7 @@ package de.richard.horionbot.utils;
 
 import net.dv8tion.jda.core.entities.User;
 
-import java.awt.Image;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,8 +15,7 @@ public class UserInfo {
 
     public static Image getAvatar(User user) {
         Downloader downloader = new Downloader();
-        Image avatar = downloader.image(user.getAvatarUrl());
-        return avatar;
+        return Downloader.image(user.getAvatarUrl());
     }
 
 }

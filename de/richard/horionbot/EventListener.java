@@ -3,7 +3,10 @@ package de.richard.horionbot;
 import de.richard.horionbot.utils.Suggestions;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.entities.ChannelType;
+import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -13,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 
 import static de.richard.horionbot.utils.Suggestions.acceptSuggestion;
@@ -51,6 +55,14 @@ public class EventListener extends ListenerAdapter {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+
+            for (int x = 0; Message.getReactions().size() < x; x++) {
+                List<User> ReactionUsers = Message.getReactions().get(x).getUsers().complete();
+                if (ReactionUsers.contains(e.getUser())) {
+                    e.getReaction().removeReaction(e.getUser()).queue();
+                }
+            }
+
             if(e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
                 if(e.getReactionEmote().getName().contains("accept")) {
                     try {
