@@ -56,7 +56,7 @@ public class EventListener extends ListenerAdapter {
                 throw new RuntimeException(ex);
             }
 
-            for (int x = 0; Message.getReactions().size() < x; x++) {
+            for (int x = 0; x < Message.getReactions().size(); x++) {
                 List<User> ReactionUsers = Message.getReactions().get(x).getUsers().complete();
                 if (ReactionUsers.contains(e.getUser())) {
                     e.getReaction().removeReaction(e.getUser()).queue();
