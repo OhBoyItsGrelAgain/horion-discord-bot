@@ -29,7 +29,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
                 jda.addEventListener(cmd.registerCommand(new GithubCommand()));
                 jda.addEventListener(cmd.registerCommand(new ModuleinfoCommand()));
-                jda.addEventListener(cmd.registerCommand(new SetgameCommand()));
+        // jda.addEventListener(cmd.registerCommand(new SetgameCommand())); ---- Removed due to autoupdate
                 jda.addEventListener(cmd.registerCommand(new EnchantmentsCommand()));
                 jda.addEventListener(cmd.registerCommand(new SuggestionCommand()));
                 jda.addEventListener(cmd.registerCommand(new TogglesuggestionsCommand()));
