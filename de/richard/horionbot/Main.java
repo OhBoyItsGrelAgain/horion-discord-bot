@@ -1,11 +1,15 @@
 package de.richard.horionbot;
 
 import de.richard.horionbot.commands.*;
+import de.richard.horionbot.utils.BotInfo;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 
 import javax.security.auth.login.LoginException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Main
 {
@@ -39,5 +43,11 @@ public class Main
         bot = jda.build();
         bot.awaitReady();
         bot.setAutoReconnect(true);
+
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        Runnable task = () -> {
+            BotInfo.updateGame();
+        };
+        executor.scheduleWithFixedDelay(task, 0, 60, TimeUnit.SECONDS);
     }
 }
