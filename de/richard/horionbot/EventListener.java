@@ -3,11 +3,9 @@ package de.richard.horionbot;
 import de.richard.horionbot.utils.Suggestions;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -23,22 +21,6 @@ import static de.richard.horionbot.utils.Suggestions.acceptSuggestion;
 import static de.richard.horionbot.utils.Suggestions.denySuggestion;
 
 public class EventListener extends ListenerAdapter {
-
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event)
-    {
-        if (event.isFromType(ChannelType.PRIVATE))
-        {
-            System.out.printf("[Private Message] %s: %s\n", event.getAuthor().getName(),
-                    event.getMessage().getContentDisplay());
-        }
-        else
-        {
-            System.out.printf("[%s][%s] %s: %s\n", event.getGuild().getName(),
-                    event.getTextChannel().getName(), event.getMember().getEffectiveName(),
-                    event.getMessage().getContentDisplay());
-        }
-    }
 
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
