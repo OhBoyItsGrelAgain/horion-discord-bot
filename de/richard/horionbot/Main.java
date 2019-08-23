@@ -2,6 +2,7 @@ package de.richard.horionbot;
 
 import de.richard.horionbot.commands.*;
 import de.richard.horionbot.utils.BotInfo;
+import de.richard.horionbot.utils.ConfigManager;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
@@ -19,7 +20,10 @@ public class Main
     public static void main(String[] args)
             throws LoginException, InterruptedException
     {
-        JDABuilder jda = new JDABuilder("NjA1ODIyNjAyNDAwODkwOTAz.XUGTNA.UwDoJ57nZpUhrr7g0suT3Y5FnFs");
+        // Load config stuff
+        ConfigManager.initiate();
+
+        JDABuilder jda = new JDABuilder(ConfigManager.config.getProperty("token"));
 
                 // Add Commands
                 HelpCommand cmd = new HelpCommand();
@@ -44,6 +48,7 @@ public class Main
         bot.awaitReady();
         bot.setAutoReconnect(true);
 
+        // Scheduler
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         Runnable task = () -> {
             BotInfo.updateGame();

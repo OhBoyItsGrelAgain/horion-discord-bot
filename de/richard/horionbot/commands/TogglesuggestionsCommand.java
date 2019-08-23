@@ -1,11 +1,9 @@
 package de.richard.horionbot.commands;
 
-import de.richard.horionbot.Main;
-import de.richard.horionbot.utils.BotInfo;
+import de.richard.horionbot.utils.ConfigManager;
 import de.richard.horionbot.utils.Suggestions;
 import de.richard.horionbot.utils.UserInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Arrays;
@@ -20,9 +18,11 @@ public class TogglesuggestionsCommand extends Command
         if(UserInfo.isBotAdmin(e.getAuthor())) {
             if(Suggestions.suggestionsEnabled) {
                 Suggestions.suggestionsEnabled = false;
+                ConfigManager.save();
                 e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Suggestions are now disabled. Users can no longer add new suggestions!").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
             } else {
                 Suggestions.suggestionsEnabled = true;
+                ConfigManager.save();
                 e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Suggestions are now enabled. Users can now suggest their ideas again!").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
             }
         } else {

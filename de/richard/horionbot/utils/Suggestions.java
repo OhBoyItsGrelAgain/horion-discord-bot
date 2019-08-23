@@ -19,7 +19,7 @@ public class Suggestions extends ListenerAdapter {
     public static TextChannel SuggestionChannel = Main.bot.getGuildById("605086182560235569").getTextChannelById("606280173075038219");
     public static TextChannel acceptedSuggestionsChannel = Main.bot.getGuildById("605086182560235569").getTextChannelById("610834071966187539");
 
-    public static boolean suggestionsEnabled = true;
+    public static boolean suggestionsEnabled = ConfigManager.config.getProperty("suggestionsEnabled").equals("true");
 
     public static void addSuggestion(String title, String description, User author) {
         String SuggestionID = UUID.randomUUID().toString();
