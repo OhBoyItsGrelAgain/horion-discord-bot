@@ -49,7 +49,7 @@ public class Suggestions extends ListenerAdapter {
                     .setColor(new Color(0x4D95E9))
                     .setTitle(title)
                     .setDescription(description)
-                    .setFooter("SuggestionID: " + SuggestionID + " | Suggested by " + author.getAsTag(), "https://files.catbox.moe/g9w833.png")
+                    .setFooter("SuggestionID: " + SuggestionID + " | Suggested by " + author.getAsTag(), null)
                     .build();
             SuggestionChannel.sendMessage(suggestion).queue(callback);
             prop.setProperty("authorID", author.getId());
@@ -78,7 +78,7 @@ public class Suggestions extends ListenerAdapter {
                     .setColor(new Color(0x4D95E9))
                     .setTitle(title)
                     .setDescription(description)
-                    .setFooter("SuggestionID: " + SuggestionID + " | Suggested by " + SuggestionChannel.getGuild().getMemberById(authorID).getUser().getAsTag(), "https://files.catbox.moe/g9w833.png")
+                    .setFooter("SuggestionID: " + SuggestionID + " | Suggested by " + SuggestionChannel.getGuild().getMemberById(authorID).getUser().getAsTag(), null)
                     .build();
             acceptedSuggestionsChannel.sendMessage(suggestion).queue((m) -> {
                 m.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("accept", true).get(0)).queue();

@@ -13,10 +13,12 @@ import java.util.concurrent.TimeUnit;
 public class ModuleinfoCommand extends Command
 {
     private TextChannel channel;
+    private String footer;
 
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args) {
         channel = e.getTextChannel();
+        footer = e.getAuthor().getAsTag() + " wrote: " + e.getMessage().getContentDisplay();
         if (args.length < 2)
             sendAnswer("No module specified", "Please use the correct syntax: **.moduleinfo <module>**");
         else {
@@ -160,7 +162,7 @@ public class ModuleinfoCommand extends Command
     }
 
     private void sendAnswer(String name, String description) {
-        MessageEmbed msg = new EmbedBuilder().setDescription(description).setTitle(name).setColor(new Color(0x4D95E9)).build();
+        MessageEmbed msg = new EmbedBuilder().setDescription(description).setTitle(name).setColor(new Color(0x4D95E9)).setFooter(footer, null).build();
         channel.sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
     }
 
