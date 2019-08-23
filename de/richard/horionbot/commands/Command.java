@@ -1,6 +1,6 @@
 package de.richard.horionbot.commands;
 
-import net.dv8tion.jda.core.EmbedBuilder;
+import de.richard.horionbot.utils.ConfigManager;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
@@ -9,10 +9,12 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public abstract class Command extends ListenerAdapter
 {
+
+    public static String Prefix = ConfigManager.config.getProperty("prefix");
+
     public abstract void onCommand(MessageReceivedEvent e, String[] args);
     public abstract List<String> getAliases();
     public abstract String getDescription();
@@ -37,7 +39,7 @@ public abstract class Command extends ListenerAdapter
 
     protected boolean containsCommand(Message message)
     {
-        return getAliases().contains(commandArgs(message)[0]);
+        return getAliases().contains(commandArgs(message)[0].replace(Command.Prefix, ""));
     }
 
     protected String[] commandArgs(Message message)

@@ -1,7 +1,6 @@
 package de.richard.horionbot.commands;
 
 import de.richard.horionbot.Main;
-import de.richard.horionbot.utils.BotInfo;
 import de.richard.horionbot.utils.UserInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Game;
@@ -24,9 +23,8 @@ public class SetgameCommand extends Command
             for (int x = 0;  x < args.length; x++) {
                 game = game + args[x] + " ";
             }
-            game = game.replace(".setgame ", "");
+            game = game.substring(Command.Prefix.length() + 8);
             game = game.replace("{version}", Main.version);
-            game = game.replace("{uptime}", BotInfo.getUptime());
             e.getJDA().getPresence().setGame(Game.playing(game));
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }} else {
@@ -37,7 +35,7 @@ public class SetgameCommand extends Command
     @Override
     public java.util.List<String> getAliases()
     {
-        return Arrays.asList(".setgame", ".game");
+        return Arrays.asList("setgame", "game");
     }
 
     @Override
@@ -61,6 +59,6 @@ public class SetgameCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".setgame <game> - Set the game the bot's playing!");
+        return Arrays.asList(Command.Prefix + "setgame <game> - Set the game the bot's playing!");
     }
 }

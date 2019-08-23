@@ -7,7 +7,7 @@ import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -51,7 +51,7 @@ public class TroubleshootingCommand extends Command
     @Override
     public java.util.List<String> getAliases()
     {
-        return Arrays.asList(".troubleshooting", ".trouble", "troubleshoot");
+        return Arrays.asList("troubleshooting", "trouble", "troubleshoot");
     }
 
     @Override
@@ -75,6 +75,6 @@ public class TroubleshootingCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".troubleshoot - Display troubleshooting message!");
+        return Arrays.asList(Command.Prefix + "troubleshoot - Display troubleshooting message!");
     }
 }

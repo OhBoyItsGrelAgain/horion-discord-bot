@@ -17,7 +17,7 @@ public class SuggestionCommand extends Command
             for (int x = 0; x < args.length; x++) {
                 full = full + " " + args[x];
             }
-            full = full.substring(9);
+            full = full.substring(Command.Prefix.length() + 8);
             if (full.contains("|")) {
                 String[] parts = full.split("\\|");
                 String title = parts[0];
@@ -34,7 +34,7 @@ public class SuggestionCommand extends Command
     @Override
     public java.util.List<String> getAliases()
     {
-        return Arrays.asList(".suggestion", ".suggest");
+        return Arrays.asList("suggestion", "suggest");
     }
 
     @Override
@@ -58,6 +58,6 @@ public class SuggestionCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".suggest <title>|<description> - Suggest a new idea");
+        return Arrays.asList(Command.Prefix + "suggest <title>|<description> - Suggest a new idea");
     }
 }

@@ -33,7 +33,7 @@ public class TogglesuggestionsCommand extends Command
     @Override
     public java.util.List<String> getAliases()
     {
-        return Arrays.asList(".togglesuggestions", ".togglesuggestion", ".ts");
+        return Arrays.asList("togglesuggestions", "togglesuggestion", "ts");
     }
 
     @Override
@@ -57,6 +57,6 @@ public class TogglesuggestionsCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".togglesuggestion - Toggle Suggestions!");
+        return Arrays.asList(Command.Prefix + "togglesuggestion - Toggle Suggestions!");
     }
 }

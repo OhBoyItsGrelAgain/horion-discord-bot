@@ -169,7 +169,7 @@ public class ModuleinfoCommand extends Command
     @Override
     public List<String> getAliases()
     {
-        return Arrays.asList(".moduleinfo", ".module", ".mi");
+        return Arrays.asList("moduleinfo", "module", "mi");
     }
 
     @Override
@@ -193,6 +193,6 @@ public class ModuleinfoCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".moduleinfo - Displays information about a module");
+        return Arrays.asList(Command.Prefix + "moduleinfo - Displays information about a module");
     }
 }

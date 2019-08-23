@@ -37,6 +37,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new EnchantmentsCommand()));
                 jda.addEventListener(cmd.registerCommand(new SuggestionCommand()));
                 jda.addEventListener(cmd.registerCommand(new TogglesuggestionsCommand()));
+        jda.addEventListener(cmd.registerCommand(new SetprefixCommand()));
 
                 // Register EventListener
                 jda.addEventListener(new EventListener());

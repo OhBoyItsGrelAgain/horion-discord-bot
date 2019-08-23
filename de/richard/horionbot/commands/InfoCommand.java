@@ -6,7 +6,7 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +32,7 @@ public class InfoCommand extends Command
     @Override
     public List<String> getAliases()
     {
-        return Arrays.asList(".info", ".information");
+        return Arrays.asList("info", "information");
     }
 
     @Override
@@ -56,6 +56,6 @@ public class InfoCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".info - Displays information about the bot");
+        return Arrays.asList(Command.Prefix + "info - Displays information about the bot");
     }
 }

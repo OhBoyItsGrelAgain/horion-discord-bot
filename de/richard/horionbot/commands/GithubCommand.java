@@ -18,7 +18,7 @@ public class GithubCommand extends Command
     @Override
     public java.util.List<String> getAliases()
     {
-        return Arrays.asList(".github", ".repo");
+        return Arrays.asList("github", "repo");
     }
 
     @Override
@@ -42,6 +42,6 @@ public class GithubCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".github - Sends link to GitHub repo");
+        return Arrays.asList(Command.Prefix + "github - Sends link to GitHub repo");
     }
 }

@@ -7,7 +7,7 @@ import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.commons.lang3.StringUtils;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -49,7 +49,7 @@ public class HelpCommand extends Command
     @Override
     public List<String> getAliases()
     {
-        return Arrays.asList(".help", ".commands");
+        return Arrays.asList("help", "commands");
     }
 
     @Override
@@ -74,11 +74,11 @@ public class HelpCommand extends Command
     public List<String> getUsageInstructions()
     {
         return Collections.singletonList(
-                ".help   **ODER**  .help *<command>*\n"
-                        + ".help - Shows a simple list of all commands.\n"
-                        + ".help <command> - Displays name, description and instructions to the specified command.\n"
+                Command.Prefix + "help   **ODER**  " + Command.Prefix + "help *<command>*\n"
+                        + Command.Prefix + "help - Shows a simple list of all commands.\n"
+                        + Command.Prefix + "help <command> - Displays name, description and instructions to the specified command.\n"
                         + "   - You can also use an alias.\n"
-                        + "__Example:__ .help info");
+                        + "__Example:__ " + Command.Prefix + "help info");
     }
 
     private void sendPrivate(PrivateChannel channel, String[] args)
@@ -94,10 +94,10 @@ public class HelpCommand extends Command
             {
                 String description = c.getDescription();
                 description = (description == null || description.isEmpty()) ? NO_DESCRIPTION : description;
-                msg.addField(c.getAliases().get(0), description, false);
+                msg.addField(Command.Prefix + c.getAliases().get(0), description, false);
             }
 
-            msg.setFooter("Tipp: Enter .help <command> to get advanced information!", "https://files.catbox.moe/g9w833.png");
+            msg.setFooter("Tipp: Enter " + Command.Prefix + "help <command> to get advanced information!", "https://files.catbox.moe/g9w833.png");
             channel.sendMessage(msg.build()).queue();
         }
         else
@@ -135,7 +135,7 @@ public class HelpCommand extends Command
             }
             channel.sendMessage(new EmbedBuilder()
                     .setColor(new Color(0x4D95E9))
-                    .addField(":exclamation: **Error:**", "The Command '**" + args[1] + "**' does not exist. Please use .help to show all commands.", false)
+                    .addField(":exclamation: **Error:**", "The Command '**" + args[1] + "**' does not exist. Please use " + Command.Prefix + "help to show all commands.", false)
                     .build()).queue();
         }
     }

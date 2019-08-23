@@ -3,7 +3,7 @@ package de.richard.horionbot.commands;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +23,7 @@ public class PingCommand extends Command
     @Override
     public java.util.List<String> getAliases()
     {
-        return Arrays.asList(".ping");
+        return Arrays.asList("ping");
     }
 
     @Override
@@ -47,6 +47,6 @@ public class PingCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(".ping - Display the bots ping!");
+        return Arrays.asList(Command.Prefix + "ping - Display the bots ping!");
     }
 }
