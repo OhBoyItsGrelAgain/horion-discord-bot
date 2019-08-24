@@ -1,9 +1,8 @@
 package de.richard.horionbot.commands;
 
-import de.richard.horionbot.Main;
+import de.richard.horionbot.utils.BotInfo;
 import de.richard.horionbot.utils.UserInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Arrays;
@@ -12,6 +11,9 @@ import java.util.concurrent.TimeUnit;
 
 public class SetgameCommand extends Command
 {
+
+    public static String game = "with {current_users} users | {prefix}help";
+
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
     {
@@ -19,13 +21,13 @@ public class SetgameCommand extends Command
         if(args.length < 2) {
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** Please specify a game").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         } else {
-            String game = "";
+            game = "";
             for (int x = 0;  x < args.length; x++) {
                 game = game + args[x] + " ";
             }
             game = game.substring(Command.Prefix.length() + 8);
-            game = game.replace("{version}", Main.version);
-            e.getJDA().getPresence().setGame(Game.playing(game));
+            game = game.substring(0, game.length() - 1);
+            BotInfo.updateGame();
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }} else {
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** You're not allowed to use this command").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));

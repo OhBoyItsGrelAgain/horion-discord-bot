@@ -5,7 +5,6 @@ import de.richard.horionbot.utils.BotInfo;
 import de.richard.horionbot.utils.ConfigManager;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game;
 
 import javax.security.auth.login.LoginException;
 import java.util.concurrent.Executors;
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main
 {
-    public static String version = "1.3";
+    public static String version = "1.4";
     public static JDA bot;
 
     public static void main(String[] args)
@@ -33,7 +32,7 @@ public class Main
                 jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
                 jda.addEventListener(cmd.registerCommand(new GithubCommand()));
                 jda.addEventListener(cmd.registerCommand(new ModuleinfoCommand()));
-        // jda.addEventListener(cmd.registerCommand(new SetgameCommand())); ---- Removed due to autoupdate
+        jda.addEventListener(cmd.registerCommand(new SetgameCommand()));
                 jda.addEventListener(cmd.registerCommand(new EnchantmentsCommand()));
                 jda.addEventListener(cmd.registerCommand(new SuggestionCommand()));
                 jda.addEventListener(cmd.registerCommand(new TogglesuggestionsCommand()));
@@ -41,9 +40,6 @@ public class Main
 
                 // Register EventListener
                 jda.addEventListener(new EventListener());
-
-                // Set game activity
-                jda.setGame(Game.playing("Minecraft | v" + version));
 
         bot = jda.build();
         bot.awaitReady();

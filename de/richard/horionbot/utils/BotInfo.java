@@ -1,6 +1,8 @@
 package de.richard.horionbot.utils;
 
 import de.richard.horionbot.Main;
+import de.richard.horionbot.commands.Command;
+import de.richard.horionbot.commands.SetgameCommand;
 import net.dv8tion.jda.core.entities.Game;
 
 import java.lang.management.ManagementFactory;
@@ -20,7 +22,11 @@ public class BotInfo {
     }
 
     public static void updateGame() {
-        Main.bot.getPresence().setGame(Game.playing("with " + Analytics.getCurrentUserCount() + " users"));
+        String game = SetgameCommand.game
+                .replace("{current_users}", "" + Analytics.getCurrentUserCount())
+                .replace("{prefix}", Command.Prefix)
+                .replace("{version}", Main.version);
+        Main.bot.getPresence().setGame(Game.playing(game));
     }
 
 }
