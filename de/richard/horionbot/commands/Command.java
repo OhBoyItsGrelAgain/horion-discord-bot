@@ -39,7 +39,7 @@ public abstract class Command extends ListenerAdapter
 
     protected boolean containsCommand(Message message)
     {
-        return getAliases().contains(commandArgs(message)[0].replace(Command.Prefix, ""));
+        return getAliases().contains(commandArgs(message)[0].substring(Prefix.length()));
     }
 
     protected String[] commandArgs(Message message)
