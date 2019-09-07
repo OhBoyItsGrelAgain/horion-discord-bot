@@ -12,6 +12,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public class Suggestions extends ListenerAdapter {
@@ -42,8 +43,8 @@ public class Suggestions extends ListenerAdapter {
             OutputStream os = new FileOutputStream("suggestions/" + SuggestionID + ".xml");
             Properties prop = new Properties();
             Consumer<Message> callback = (message) -> {
-                message.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("accept", true).get(0)).queue();
-                message.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("deny", true).get(0)).queue();
+                message.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("accept", true).get(0)).queueAfter(1, TimeUnit.SECONDS);
+                message.addReaction(Main.bot.getGuildById("503336354546057218").getEmotesByName("deny", true).get(0)).queueAfter(2, TimeUnit.SECONDS);
             };
             MessageEmbed suggestion = new EmbedBuilder()
                     .setColor(new Color(0x4D95E9))

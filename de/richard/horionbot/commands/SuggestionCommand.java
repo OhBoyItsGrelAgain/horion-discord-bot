@@ -18,7 +18,7 @@ public class SuggestionCommand extends Command
                 String[] parts = full.split("\\|");
                 String title = parts[0];
                 String description = parts[1];
-                Suggestions.addSuggestion(title.substring(1), description, e.getAuthor());
+                Suggestions.addSuggestion(title, description, e.getAuthor());
             } else {
                 e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Wrong Syntax! Please use *.suggest <title>|<description>*").build()).queue((m) -> m.delete().queueAfter(60, TimeUnit.SECONDS));
             }
