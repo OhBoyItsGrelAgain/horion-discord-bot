@@ -3,8 +3,8 @@ package de.richard.horionbot;
 import de.richard.horionbot.commands.*;
 import de.richard.horionbot.utils.BotInfo;
 import de.richard.horionbot.utils.ConfigManager;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 
 import javax.security.auth.login.LoginException;
 import java.util.concurrent.Executors;
@@ -26,20 +26,22 @@ public class Main
 
                 // Add Commands
                 HelpCommand cmd = new HelpCommand();
-                jda.addEventListener(cmd.registerCommand(cmd));
-                jda.addEventListener(cmd.registerCommand(new InfoCommand()));
-                jda.addEventListener(cmd.registerCommand(new PingCommand()));
-                jda.addEventListener(cmd.registerCommand(new TroubleshootingCommand()));
-                jda.addEventListener(cmd.registerCommand(new GithubCommand()));
-                jda.addEventListener(cmd.registerCommand(new ModuleinfoCommand()));
-        jda.addEventListener(cmd.registerCommand(new SetgameCommand()));
-                jda.addEventListener(cmd.registerCommand(new EnchantmentsCommand()));
-                jda.addEventListener(cmd.registerCommand(new SuggestionCommand()));
-                jda.addEventListener(cmd.registerCommand(new TogglesuggestionsCommand()));
-        jda.addEventListener(cmd.registerCommand(new SetprefixCommand()));
+        jda.addEventListeners(
+                cmd.registerCommand(cmd),
+                cmd.registerCommand(new InfoCommand()),
+                cmd.registerCommand(new PingCommand()),
+                cmd.registerCommand(new TroubleshootingCommand()),
+                cmd.registerCommand(new GithubCommand()),
+                cmd.registerCommand(new ModuleinfoCommand()),
+                cmd.registerCommand(new SetgameCommand()),
+                cmd.registerCommand(new EnchantmentsCommand()),
+                cmd.registerCommand(new SuggestionCommand()),
+                cmd.registerCommand(new TogglesuggestionsCommand()),
+                cmd.registerCommand(new SetprefixCommand())
+        );
 
                 // Register EventListener
-                jda.addEventListener(new EventListener());
+        jda.addEventListeners(new EventListener());
 
         bot = jda.build();
         bot.awaitReady();

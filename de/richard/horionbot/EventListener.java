@@ -1,13 +1,13 @@
 package de.richard.horionbot;
 
 import de.richard.horionbot.utils.Suggestions;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.react.MessageReactionAddEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
 import java.io.File;
@@ -25,7 +25,7 @@ public class EventListener extends ListenerAdapter {
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
         if (e.getTextChannel().equals(Suggestions.SuggestionChannel)) {
-            Message Message = Suggestions.SuggestionChannel.getMessageById(e.getMessageId()).complete();
+            Message Message = Suggestions.SuggestionChannel.getHistory().getMessageById(e.getMessageId());
             String SuggestionID = Message.getEmbeds().get(0).getFooter().getText().substring(14);
             SuggestionID = SuggestionID.substring(0, 36);
             String authorID;
@@ -39,7 +39,7 @@ public class EventListener extends ListenerAdapter {
             }
 
             for (int x = 0; x < Message.getReactions().size(); x++) {
-                List<User> ReactionUsers = Message.getReactions().get(x).getUsers().complete();
+                List<User> ReactionUsers = Message.getReactions().get(x).retrieveUsers().complete();
                 if (ReactionUsers.contains(e.getUser()) && !Message.getReactions().get(x).getReactionEmote().equals(e.getReaction().getReactionEmote()) && !e.getUser().isBot()) {
                     e.getReaction().removeReaction(e.getUser()).queue();
                 }
@@ -72,7 +72,7 @@ public class EventListener extends ListenerAdapter {
             }
         }
         if (e.getTextChannel().equals(Suggestions.acceptedSuggestionsChannel)) {
-            Message message = Suggestions.acceptedSuggestionsChannel.getMessageById(e.getMessageId()).complete();
+            Message message = Suggestions.acceptedSuggestionsChannel.getHistory().getMessageById(e.getMessageId());
             MessageEmbed oldembed = message.getEmbeds().get(0);
             String SuggestionID = oldembed.getFooter().getText().substring(14);
             SuggestionID = SuggestionID.substring(0, 36);

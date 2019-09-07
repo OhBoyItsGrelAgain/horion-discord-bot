@@ -8,6 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="commons-lang3-3.9" level="project" />
-    <orderEntry type="library" name="JDA-3.8.3_463-withDependencies" level="project" />
+    <orderEntry type="library" name="JDA" level="project" />
+    <orderEntry type="library" name="org.json:json:20190722" level="project" />
   </component>
 </module>

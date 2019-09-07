@@ -3,7 +3,7 @@ package de.richard.horionbot.utils;
 import de.richard.horionbot.Main;
 import de.richard.horionbot.commands.Command;
 import de.richard.horionbot.commands.SetgameCommand;
-import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.api.entities.Activity;
 
 import java.lang.management.ManagementFactory;
 
@@ -26,7 +26,7 @@ public class BotInfo {
                 .replace("{current_users}", "" + Analytics.getCurrentUserCount())
                 .replace("{prefix}", Command.Prefix)
                 .replace("{version}", Main.version);
-        Main.bot.getPresence().setGame(Game.playing(game));
+        Main.bot.getPresence().setActivity(Activity.playing(game));
     }
 
 }

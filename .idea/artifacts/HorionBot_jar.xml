@@ -4,7 +4,8 @@
     <root id="archive" name="HorionBot.jar">
       <element id="module-output" name="Horion-Discord-Bot" />
       <element id="extracted-dir" path="$PROJECT_DIR$/commons-lang3-3.9.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/JDA-3.8.3_463-withDependencies.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/json-20190722.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/JDA.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
