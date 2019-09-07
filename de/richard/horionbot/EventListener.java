@@ -25,8 +25,8 @@ public class EventListener extends ListenerAdapter {
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
         if (e.getTextChannel().equals(Suggestions.SuggestionChannel)) {
-            Message Message = Suggestions.SuggestionChannel.getHistory().getMessageById(e.getMessageId());
-            String SuggestionID = Message.getEmbeds().get(0).getFooter().getText().substring(14);
+            Message message = e.getTextChannel().retrieveMessageById(e.getMessageId()).complete();
+            String SuggestionID = message.getEmbeds().get(0).getFooter().getText().substring(14);
             SuggestionID = SuggestionID.substring(0, 36);
             String authorID;
             try{
@@ -38,9 +38,9 @@ public class EventListener extends ListenerAdapter {
                 throw new RuntimeException(ex);
             }
 
-            for (int x = 0; x < Message.getReactions().size(); x++) {
-                List<User> ReactionUsers = Message.getReactions().get(x).retrieveUsers().complete();
-                if (ReactionUsers.contains(e.getUser()) && !Message.getReactions().get(x).getReactionEmote().equals(e.getReaction().getReactionEmote()) && !e.getUser().isBot()) {
+            for (int x = 0; x < message.getReactions().size(); x++) {
+                List<User> ReactionUsers = message.getReactions().get(x).retrieveUsers().complete();
+                if (ReactionUsers.contains(e.getUser()) && !message.getReactions().get(x).getReactionEmote().equals(e.getReaction().getReactionEmote()) && !e.getUser().isBot()) {
                     e.getReaction().removeReaction(e.getUser()).queue();
                 }
             }
@@ -72,7 +72,7 @@ public class EventListener extends ListenerAdapter {
             }
         }
         if (e.getTextChannel().equals(Suggestions.acceptedSuggestionsChannel)) {
-            Message message = Suggestions.acceptedSuggestionsChannel.getHistory().getMessageById(e.getMessageId());
+            Message message = Suggestions.acceptedSuggestionsChannel.retrieveMessageById(e.getMessageId()).complete();
             MessageEmbed oldembed = message.getEmbeds().get(0);
             String SuggestionID = oldembed.getFooter().getText().substring(14);
             SuggestionID = SuggestionID.substring(0, 36);
