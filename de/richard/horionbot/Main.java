@@ -2,6 +2,7 @@ package de.richard.horionbot;
 
 import de.richard.horionbot.commands.*;
 import de.richard.horionbot.utils.BotInfo;
+import de.richard.horionbot.utils.CommandManager;
 import de.richard.horionbot.utils.ConfigManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -24,23 +25,23 @@ public class Main
 
         JDABuilder jda = new JDABuilder(ConfigManager.config.getProperty("token"));
 
-                // Add Commands
-                HelpCommand cmd = new HelpCommand();
+        // Add Commands
+        CommandManager manager = new CommandManager();
         jda.addEventListeners(
-                cmd.registerCommand(cmd),
-                cmd.registerCommand(new InfoCommand()),
-                cmd.registerCommand(new PingCommand()),
-                cmd.registerCommand(new TroubleshootingCommand()),
-                cmd.registerCommand(new GithubCommand()),
-                cmd.registerCommand(new ModuleinfoCommand()),
-                cmd.registerCommand(new SetgameCommand()),
-                cmd.registerCommand(new EnchantmentsCommand()),
-                cmd.registerCommand(new SuggestionCommand()),
-                cmd.registerCommand(new TogglesuggestionsCommand()),
-                cmd.registerCommand(new SetprefixCommand())
+                manager.registerCommand(new HelpCommand()),
+                manager.registerCommand(new InfoCommand()),
+                manager.registerCommand(new PingCommand()),
+                manager.registerCommand(new TroubleshootingCommand()),
+                manager.registerCommand(new GithubCommand()),
+                manager.registerCommand(new ModuleinfoCommand()),
+                manager.registerCommand(new SetgameCommand()),
+                manager.registerCommand(new EnchantmentsCommand()),
+                manager.registerCommand(new SuggestionCommand()),
+                manager.registerCommand(new TogglesuggestionsCommand()),
+                manager.registerCommand(new SetprefixCommand())
         );
 
-                // Register EventListener
+        // Register EventListener
         jda.addEventListeners(new EventListener());
 
         bot = jda.build();

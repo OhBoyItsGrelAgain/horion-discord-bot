@@ -1,5 +1,6 @@
 package de.richard.horionbot.commands;
 
+import de.richard.horionbot.utils.CommandManager;
 import de.richard.horionbot.utils.UserInfo;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
@@ -22,18 +23,7 @@ public class HelpCommand extends Command
     private static final String NO_DESCRIPTION = "No description defined. Sorry!";
     private static final String NO_USAGE = "There were no instructions given. Sorry!";
 
-    private TreeMap<String, Command> commands;
-
-    public HelpCommand()
-    {
-        commands = new TreeMap<>();
-    }
-
-    public Command registerCommand(Command command)
-    {
-        commands.put(command.getAliases().get(0), command);
-        return command;
-    }
+    private TreeMap<String, Command> commands = CommandManager.commands;
 
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
