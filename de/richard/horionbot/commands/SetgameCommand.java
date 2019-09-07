@@ -21,12 +21,7 @@ public class SetgameCommand extends Command
         if(args.length < 2) {
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** Please specify a game").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         } else {
-            game = "";
-            for (int x = 0;  x < args.length; x++) {
-                game = game + args[x] + " ";
-            }
-            game = game.substring(Command.Prefix.length() + 8);
-            game = game.substring(0, game.length() - 1);
+            game = String.join(" ", args).substring(args[0].length() + 1);
             BotInfo.updateGame();
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }} else {

@@ -16,12 +16,7 @@ public class SetprefixCommand extends Command {
             if (args.length < 2) {
                 e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** Please specify a prefix").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
             } else {
-                String prefix = "";
-                for (int x = 0; x < args.length; x++) {
-                    prefix = prefix + args[x] + " ";
-                }
-                prefix = prefix.substring(Command.Prefix.length() + 10);
-                prefix = prefix.replace(" ", "");
+                String prefix = String.join(" ", args).substring(args[0].length() + 1);
                 Command.Prefix = prefix;
                 ConfigManager.save();
                 e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Prefix changed to *" + prefix + "*").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));

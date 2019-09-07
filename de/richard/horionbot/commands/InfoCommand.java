@@ -18,13 +18,13 @@ public class InfoCommand extends Command
     {
         MessageEmbed msg = new EmbedBuilder()
                 .setTitle("**Information**")
-                .setDescription("**horion discord bot, only for epic gamers**")
+                .setDescription("horion discord bot, only for epic gamers")
                 .setColor(new Color(255, 176, 111))
                 .addField("Version", Main.version, false)
                 .addField("Uptime", BotInfo.getUptime(), false)
                 .addField("ID", e.getJDA().getSelfUser().getId(), false)
-                .addField("Github", "https://github.com/richardletshacks/horion-discord-bot", false)
-                .setFooter("Made by Richard, with help of the Java-Discord-API (JDA)", "https://files.catbox.moe/y690bs.png")
+                .addField("GitHub", "https://github.com/richardletshacks/horion-discord-bot", false)
+                .setFooter("Made by Richard, with help of the Java-Discord-API (JDA)", null)
                 .build();
         e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
     }

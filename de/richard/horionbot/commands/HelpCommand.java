@@ -1,9 +1,11 @@
 package de.richard.horionbot.commands;
 
+import de.richard.horionbot.utils.UserInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.PrivateChannel;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.commons.lang3.StringUtils;
 
@@ -40,10 +42,10 @@ public class HelpCommand extends Command
         {
             e.getTextChannel().sendMessage(new EmbedBuilder()
                     .setColor(new Color(0x4D95E9))
-                    .setTitle(e.getAuthor().getName() + ": Help was sent to you as private message.")
+                    .setDescription("Help was sent to you as private message, " + e.getAuthor().getAsMention())
                     .build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }
-        sendPrivate(e.getAuthor().openPrivateChannel().complete(), args);
+        sendPrivate(e.getAuthor(), args);
     }
 
     @Override
@@ -81,8 +83,9 @@ public class HelpCommand extends Command
                         + "__Example:__ " + Command.Prefix + "help info");
     }
 
-    private void sendPrivate(PrivateChannel channel, String[] args)
+    private void sendPrivate(User author, String[] args)
     {
+        PrivateChannel channel = author.openPrivateChannel().complete();
         if (args.length < 2)
         {
             EmbedBuilder msg = new EmbedBuilder()
@@ -93,16 +96,20 @@ public class HelpCommand extends Command
             for (Command c : commands.values())
             {
                 String description = c.getDescription();
-                description = (description == null || description.isEmpty()) ? NO_DESCRIPTION : description;
-                msg.addField(Command.Prefix + c.getAliases().get(0), description, false);
+                if (!description.contains("(Bot-Owner only)")) {
+                    description = (description == null || description.isEmpty()) ? NO_DESCRIPTION : description;
+                    msg.addField(Command.Prefix + c.getAliases().get(0), description, false);
+                } else if (UserInfo.isBotAdmin(author)) {
+                    description = (description == null || description.isEmpty()) ? NO_DESCRIPTION : description;
+                    msg.addField(Command.Prefix + c.getAliases().get(0), description, false);
+                }
             }
-
-            msg.setFooter("Tipp: Enter " + Command.Prefix + "help <command> to get advanced information!", "https://files.catbox.moe/g9w833.png");
+            msg.setFooter("Tip: Enter " + Command.Prefix + "help <command> to get advanced information!", "https://files.catbox.moe/g9w833.png");
             channel.sendMessage(msg.build()).queue();
         }
         else
         {
-            String command = args[1].charAt(0) == '.' ? args[1] : "." + args[1];
+            String command = args[1];
             for (Command c : commands.values())
             {
                 if (c.getAliases().contains(command))
@@ -115,9 +122,7 @@ public class HelpCommand extends Command
                     description = (description == null || description.isEmpty()) ? NO_DESCRIPTION : description;
                     usageInstructions = (usageInstructions == null || usageInstructions.isEmpty()) ? Collections.singletonList(NO_USAGE) : usageInstructions;
 
-                    // WIP: Als Embed
                     channel.sendMessage(new EmbedBuilder()
-                            .setAuthor( name, "https://huzo.bot/commands#" + name, iconurl)
                             .setColor(new Color(0x4D95E9))
                             .addField("**Description:**", description, false)
                             .addField("**Aliases:** ", StringUtils.join(c.getAliases(), ", "), false)

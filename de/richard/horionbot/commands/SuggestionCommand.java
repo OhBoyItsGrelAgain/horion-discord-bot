@@ -13,11 +13,7 @@ public class SuggestionCommand extends Command
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args) {
         if(Suggestions.suggestionsEnabled) {
-            String full = "";
-            for (int x = 0; x < args.length; x++) {
-                full = full + " " + args[x];
-            }
-            full = full.substring(Command.Prefix.length() + 8);
+            String full = String.join(" ", args).substring(args[0].length() + 1);
             if (full.contains("|")) {
                 String[] parts = full.split("\\|");
                 String title = parts[0];
@@ -34,7 +30,7 @@ public class SuggestionCommand extends Command
     @Override
     public java.util.List<String> getAliases()
     {
-        return Arrays.asList("suggestion", "suggest");
+        return Arrays.asList("suggestion", "suggest", "addsuggestion");
     }
 
     @Override

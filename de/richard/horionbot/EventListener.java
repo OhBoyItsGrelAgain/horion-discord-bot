@@ -61,10 +61,14 @@ public class EventListener extends ListenerAdapter {
                     }
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
                 }
-            } else if(e.getUser().getId().equals(authorID) && e.getReactionEmote().getName().contains("deny")) {
-                e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
-                File save = new File("suggestion/" + SuggestionID + ".xml");
-                save.delete();
+            } else if (e.getUser().getId().equals(authorID)) {
+                if (e.getReactionEmote().getName().contains("deny")) {
+                    e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
+                    File save = new File("suggestion/" + SuggestionID + ".xml");
+                    save.delete();
+                } else {
+                    e.getReaction().removeReaction(e.getUser()).queue();
+                }
             }
         }
         if (e.getTextChannel().equals(Suggestions.acceptedSuggestionsChannel)) {
