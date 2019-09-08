@@ -9,7 +9,9 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class TroubleshootingCommand extends Command
@@ -35,7 +37,7 @@ public class TroubleshootingCommand extends Command
                 .build();
         List<User> mentioned = e.getMessage().getMentionedUsers();
         if (mentioned.size() > 0) {
-                if(e.getMessage().getMember().hasPermission(Permission.MESSAGE_MANAGE) || UserInfo.isBotAdmin(e.getAuthor())) {
+            if (Objects.requireNonNull(e.getMessage().getMember()).hasPermission(Permission.MESSAGE_MANAGE) || UserInfo.isBotAdmin(e.getAuthor())) {
                     mentioned.get(0).openPrivateChannel().complete().sendMessage(msg).queue(
                             (m) -> e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Troubleshooting-Message successfully sent to " + mentioned.get(0).getAsMention()).build()).queue((msg1) -> msg1.delete().submitAfter(60, TimeUnit.SECONDS)),
                             (m) -> e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Failure: " + mentioned.get(0).getAsMention() + " doesn't have DMs enabled.").build()).queue((msg2) -> msg2.delete().submitAfter(60, TimeUnit.SECONDS))
@@ -75,6 +77,6 @@ public class TroubleshootingCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(Command.Prefix + "troubleshoot - Display troubleshooting message!");
+        return Collections.singletonList(Command.Prefix + "troubleshoot - Display troubleshooting message!");
     }
 }

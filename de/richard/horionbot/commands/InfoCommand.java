@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -56,6 +57,6 @@ public class InfoCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(Command.Prefix + "info - Displays information about the bot");
+        return Collections.singletonList(Command.Prefix + "info - Displays information about the bot");
     }
 }

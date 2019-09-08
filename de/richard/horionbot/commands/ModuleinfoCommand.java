@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -193,6 +194,6 @@ public class ModuleinfoCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(Command.Prefix + "moduleinfo - Displays information about a module");
+        return Collections.singletonList(Command.Prefix + "moduleinfo - Displays information about a module");
     }
 }

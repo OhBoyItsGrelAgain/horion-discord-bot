@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
-public class Analytics {
+class Analytics {
 
     private static JSONObject Analytics;
 
-    public static int getCurrentUserCount() {
+    static int getCurrentUserCount() {
         update();
         return Analytics.getInt("unique_users");
     }
@@ -21,7 +21,7 @@ public class Analytics {
     private static void update() {
         try {
             InputStream is = new URL("http://hbob.ml/horion/status.php").openStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             StringBuilder sb = new StringBuilder();
             int cp;
             while ((cp = rd.read()) != -1) {

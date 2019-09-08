@@ -29,6 +29,7 @@ public class Main
         CommandManager manager = new CommandManager();
         jda.addEventListeners(
                 manager.registerCommand(new HelpCommand()),
+                manager.registerCommand(new DebugCommand()),
                 manager.registerCommand(new InfoCommand()),
                 manager.registerCommand(new PingCommand()),
                 manager.registerCommand(new TroubleshootingCommand()),
@@ -38,7 +39,8 @@ public class Main
                 manager.registerCommand(new EnchantmentsCommand()),
                 manager.registerCommand(new SuggestionCommand()),
                 manager.registerCommand(new TogglesuggestionsCommand()),
-                manager.registerCommand(new SetprefixCommand())
+                manager.registerCommand(new SetprefixCommand()),
+                manager.registerCommand(new SetdownvotelimitCommand())
         );
 
         // Register EventListener
@@ -50,9 +52,6 @@ public class Main
 
         // Scheduler
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        Runnable task = () -> {
-            BotInfo.updateGame();
-        };
-        executor.scheduleWithFixedDelay(task, 0, 60, TimeUnit.SECONDS);
+        executor.scheduleWithFixedDelay(BotInfo::updateGame, 0, 60, TimeUnit.SECONDS);
     }
 }

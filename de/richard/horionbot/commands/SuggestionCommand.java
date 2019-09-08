@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -54,6 +55,6 @@ public class SuggestionCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(Command.Prefix + "suggest <title>|<description> - Suggest a new idea");
+        return Collections.singletonList(Command.Prefix + "suggest <title>|<description> - Suggest a new idea");
     }
 }

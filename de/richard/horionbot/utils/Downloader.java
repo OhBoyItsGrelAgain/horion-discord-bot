@@ -10,7 +10,7 @@ public class Downloader
 {
     public static String webpage(String urlText)
     {
-        String webpageText = "";
+        StringBuilder webpageText = new StringBuilder();
         URL url;
         InputStream is = null;
         BufferedReader br;
@@ -24,7 +24,7 @@ public class Downloader
 
             while ((line = br.readLine()) != null)
             {
-                webpageText += line;
+                webpageText.append(line);
             }
         }
         catch (MalformedURLException mue)
@@ -48,7 +48,7 @@ public class Downloader
                 // nothing to see here
             }
         }
-        return webpageText;
+        return webpageText.toString();
     }
 
     public static BufferedImage image(String urlText)

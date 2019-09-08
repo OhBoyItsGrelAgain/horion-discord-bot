@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -48,6 +49,6 @@ public class SetprefixCommand extends Command {
 
     @Override
     public List<String> getUsageInstructions() {
-        return Arrays.asList(Command.Prefix + "setprefix <prefix> - Set the game the bot's playing!");
+        return Collections.singletonList(Command.Prefix + "setprefix <prefix> - Set the game the bot's playing!");
     }
 }

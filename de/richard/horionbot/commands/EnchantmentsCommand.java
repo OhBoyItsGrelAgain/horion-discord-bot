@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -201,6 +202,6 @@ public class EnchantmentsCommand extends Command
     @Override
     public List<String> getUsageInstructions()
     {
-        return Arrays.asList(Command.Prefix + "enchantment *<name>* - Displays a list of enchantments/their id");
+        return Collections.singletonList(Command.Prefix + "enchantment *<name>* - Displays a list of enchantments/their id");
     }
 }

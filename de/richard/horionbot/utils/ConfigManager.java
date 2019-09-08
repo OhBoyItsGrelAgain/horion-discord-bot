@@ -36,6 +36,7 @@ public class ConfigManager {
                 sugvar = "false";
             }
             config.setProperty("suggestionsEnabled", sugvar);
+            config.setProperty("downvoteLimit", Suggestions.downvoteLimit + "");
             config.storeToXML(os, "Config file by Horion-Bot");
         } catch (IOException ex) {
             throw new RuntimeException(ex);
@@ -48,6 +49,7 @@ public class ConfigManager {
             config.clear();
             config.setProperty("token", "Token goes here");
             config.setProperty("prefix", ".");
+            config.setProperty("downvoteLimit", 10 + "");
             config.setProperty("suggestionsEnabled", "true");
             config.storeToXML(os, "Config file by Horion-Bot");
         } catch (IOException ex) {

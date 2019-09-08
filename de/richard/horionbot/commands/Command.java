@@ -37,17 +37,17 @@ public abstract class Command extends ListenerAdapter
         }
     }
 
-    protected boolean containsCommand(Message message)
+    private boolean containsCommand(Message message)
     {
         return getAliases().contains(commandArgs(message)[0].substring(Prefix.length()).toLowerCase()) && message.getContentDisplay().startsWith(Command.Prefix);
     }
 
-    protected String[] commandArgs(Message message)
+    private String[] commandArgs(Message message)
     {
         return commandArgs(message.getContentDisplay());
     }
 
-    protected String[] commandArgs(String string)
+    private String[] commandArgs(String string)
     {
         return string.split(" ");
     }
@@ -65,7 +65,7 @@ public abstract class Command extends ListenerAdapter
         return sendMessage(e, new MessageBuilder().append(message).build());
     }
 
-    protected boolean respondToBots()
+    private boolean respondToBots()
     {
         return false;
     }

@@ -15,10 +15,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
-import static de.richard.horionbot.utils.Suggestions.acceptSuggestion;
-import static de.richard.horionbot.utils.Suggestions.denySuggestion;
+import static de.richard.horionbot.utils.Suggestions.*;
 
 public class EventListener extends ListenerAdapter {
 
@@ -26,10 +26,10 @@ public class EventListener extends ListenerAdapter {
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
         if (e.getTextChannel().equals(Suggestions.SuggestionChannel)) {
             Message message = e.getTextChannel().retrieveMessageById(e.getMessageId()).complete();
-            String SuggestionID = message.getEmbeds().get(0).getFooter().getText().substring(14);
+            String SuggestionID = Objects.requireNonNull(Objects.requireNonNull(message.getEmbeds().get(0).getFooter()).getText()).substring(14);
             SuggestionID = SuggestionID.substring(0, 36);
             String authorID;
-            try{
+            try {
                 Properties prop = new Properties();
                 InputStream is = new FileInputStream("suggestions/" + SuggestionID + ".xml");
                 prop.loadFromXML(is);
@@ -43,17 +43,25 @@ public class EventListener extends ListenerAdapter {
                 if (ReactionUsers.contains(e.getUser()) && !message.getReactions().get(x).getReactionEmote().equals(e.getReaction().getReactionEmote()) && !e.getUser().isBot()) {
                     e.getReaction().removeReaction(e.getUser()).queue();
                 }
+                if (message.getReactions().get(x).retrieveUsers().complete().size() > downvoteLimit && e.getReaction().getReactionEmote().getName().contains("deny")) {
+                    try {
+                        denySuggestion(SuggestionID, e.getJDA().getSelfUser());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
+                }
             }
 
-            if(e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
-                if(e.getReactionEmote().getName().contains("accept")) {
+            if (Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
+                if (e.getReactionEmote().getName().contains("accept")) {
                     try {
                         acceptSuggestion(SuggestionID, e.getUser());
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
-                } else if(e.getReactionEmote().getName().contains("deny")) {
+                } else if (e.getReactionEmote().getName().contains("deny")) {
                     try {
                         denySuggestion(SuggestionID, e.getUser());
                     } catch (IOException ex) {
@@ -74,7 +82,7 @@ public class EventListener extends ListenerAdapter {
         if (e.getTextChannel().equals(Suggestions.acceptedSuggestionsChannel)) {
             Message message = Suggestions.acceptedSuggestionsChannel.retrieveMessageById(e.getMessageId()).complete();
             MessageEmbed oldembed = message.getEmbeds().get(0);
-            String SuggestionID = oldembed.getFooter().getText().substring(14);
+            String SuggestionID = Objects.requireNonNull(Objects.requireNonNull(oldembed.getFooter()).getText()).substring(14);
             SuggestionID = SuggestionID.substring(0, 36);
             if(e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
                 if(e.getReactionEmote().getName().contains("accept")) {
