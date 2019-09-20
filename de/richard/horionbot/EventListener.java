@@ -40,7 +40,7 @@ public class EventListener extends ListenerAdapter {
             }
 
             // Admin reacts to suggestion
-            if (e.getMember().hasPermission(Permission.ADMINISTRATOR)) {
+            if (e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
                 if (e.getReactionEmote().equals(MessageReaction.ReactionEmote.fromCustom(acceptReaction))) {
                         acceptSuggestion(SuggestionID, e.getUser());
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
@@ -61,7 +61,7 @@ public class EventListener extends ListenerAdapter {
                 }
             }
 
-            // Prevent users from selvoting
+            // Prevent users from selfvoting
             for (MessageReaction x : message.getReactions()) {
                 List<User> ReactionUsers = x.retrieveUsers().complete();
                 if (ReactionUsers.contains(e.getUser()) && !x.getReactionEmote().equals(e.getReaction().getReactionEmote()) && !e.getUser().isBot()) {

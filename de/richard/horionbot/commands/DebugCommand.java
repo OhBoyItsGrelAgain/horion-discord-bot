@@ -12,7 +12,6 @@ public class DebugCommand extends Command {
     public void onCommand(MessageReceivedEvent e, String[] args) {
         if (!UserInfo.isBotAdmin(e.getAuthor())) return;
 
-        // yeet
     }
 
     @Override

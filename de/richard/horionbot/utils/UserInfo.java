@@ -9,8 +9,8 @@ import java.util.List;
 public class UserInfo {
 
     public static boolean isBotAdmin(User user) {
-        List<String> admins = Arrays.asList("richard#1337", "GodGamer029#4679");
-        return (admins.contains(user.getAsTag()));
+        List<String> admins = Arrays.asList("211738304486440961", "549659051944968192");
+        return (admins.contains(user.getId()));
     }
 
     public static BufferedImage getAvatar(User user) {

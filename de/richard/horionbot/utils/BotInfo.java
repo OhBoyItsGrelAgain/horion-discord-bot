@@ -18,7 +18,7 @@ public class BotInfo {
     }
 
     public static String getInviteURL() {
-        return "https://discordapp.com/oauth2/authorize?client_id=605822602400890903&scope=bot&permissions=-1";
+        return Main.bot.getInviteUrl();
     }
 
     public static void updateGame() {

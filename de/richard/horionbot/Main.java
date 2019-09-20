@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main
 {
-    public static String version = "1.4";
+    public static String version = "1.8";
     public static JDA bot;
 
     public static void main(String[] args)
