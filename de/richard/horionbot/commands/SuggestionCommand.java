@@ -20,6 +20,7 @@ public class SuggestionCommand extends Command
                 String title = parts[0];
                 String description = parts[1];
                 Suggestions.addSuggestion(title, description, e.getAuthor());
+                e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Your suggestion was added to " + Suggestions.suggestionChannel.getAsMention() + ".").build()).queue((m) -> m.delete().queueAfter(60, TimeUnit.SECONDS));
             } else {
                 e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Wrong Syntax! Please use *.suggest <title>|<description>*").build()).queue((m) -> m.delete().queueAfter(60, TimeUnit.SECONDS));
             }

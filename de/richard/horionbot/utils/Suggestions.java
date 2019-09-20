@@ -22,8 +22,8 @@ public class Suggestions extends ListenerAdapter {
 
     public static int downvoteLimit = Integer.parseInt(ConfigManager.config.getProperty("downvoteLimit"));
 
-    public static Emote acceptReaction = Main.bot.getGuildById("503336354546057218").getEmotesByName("accept", true).get(0);
-    public static Emote denyReaction = Main.bot.getGuildById("503336354546057218").getEmotesByName("deny", true).get(0);
+    public static Emote acceptReaction = Objects.requireNonNull(Main.bot.getGuildById("503336354546057218")).getEmotesByName("accept", true).get(0);
+    public static Emote denyReaction = Objects.requireNonNull(Main.bot.getGuildById("503336354546057218")).getEmotesByName("deny", true).get(0);
 
     public static void addSuggestion(String title, String description, User author) {
         String SuggestionID = UUID.randomUUID().toString();

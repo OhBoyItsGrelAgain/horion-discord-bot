@@ -2,13 +2,15 @@ package de.richard.horionbot.commands;
 
 import de.richard.horionbot.utils.ConfigManager;
 import de.richard.horionbot.utils.Suggestions;
-import de.richard.horionbot.utils.UserInfo;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.utils.MarkdownUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class TogglesuggestionsCommand extends Command
@@ -16,14 +18,18 @@ public class TogglesuggestionsCommand extends Command
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args)
     {
-        if(UserInfo.isBotAdmin(e.getAuthor())) {
+        if (Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR)) {
             if(Suggestions.suggestionsEnabled) {
                 Suggestions.suggestionsEnabled = false;
                 ConfigManager.save();
+                Suggestions.suggestionChannel.sendMessage(MarkdownUtil.bold("Suggestions are now disabled!") + "\n" + Objects.requireNonNull(e.getMember()).getEffectiveName() + " disabled suggestions. You can no longer add new ones, but you can still vote on old suggestions.").queue();
+                Suggestions.acceptedSuggestionsChannel.sendMessage(MarkdownUtil.bold("Suggestions are now disabled!") + "\n" + Objects.requireNonNull(e.getMember()).getEffectiveName() + " disabled suggestions. You can no longer add new ones, but you can still vote on old suggestions.").queue();
                 e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Suggestions are now disabled. Users can no longer add new suggestions!").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
             } else {
                 Suggestions.suggestionsEnabled = true;
                 ConfigManager.save();
+                Suggestions.suggestionChannel.sendMessage(MarkdownUtil.bold("Suggestions are now enabled!") + "\n" + Objects.requireNonNull(e.getMember()).getEffectiveName() + " enabled suggestions. You can now add new ones in #commands using " + MarkdownUtil.monospace(".suggest title|description") + ".").queue();
+                Suggestions.acceptedSuggestionsChannel.sendMessage(MarkdownUtil.bold("Suggestions are now enabled!") + "\n" + Objects.requireNonNull(e.getMember()).getEffectiveName() + " enabled suggestions. You can now add new ones in #commands using " + MarkdownUtil.monospace(".suggest title|description") + ".").queue();
                 e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Suggestions are now enabled. Users can now suggest their ideas again!").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
             }
         } else {

@@ -1,12 +1,14 @@
 package de.richard.horionbot.commands;
 
 import de.richard.horionbot.utils.ConfigManager;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.PermissionException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.MarkdownUtil;
 
 import java.util.List;
 
@@ -25,9 +27,12 @@ public abstract class Command extends ListenerAdapter
     @Override
     public void onMessageReceived(MessageReceivedEvent e)
     {
-        if (e.getAuthor().isBot() && !respondToBots())
-            return;
+        if (e.getAuthor().isBot()) return;
         if (containsCommand(e.getMessage())) {
+            if (e.getChannelType().equals(ChannelType.PRIVATE) && !e.getMessage().getContentDisplay().startsWith(Prefix + "help")) {
+                e.getPrivateChannel().sendMessage(new EmbedBuilder().setDescription("Please use commands other than " + MarkdownUtil.monospace(Prefix + "help") + " only on the Horion discord server.").build()).queue();
+                return;
+            }
             onCommand(e, commandArgs(e.getMessage()));
             try {
                 e.getMessage().delete().submit();
@@ -63,10 +68,5 @@ public abstract class Command extends ListenerAdapter
     protected Message sendMessage(MessageReceivedEvent e, String message)
     {
         return sendMessage(e, new MessageBuilder().append(message).build());
-    }
-
-    private boolean respondToBots()
-    {
-        return false;
     }
 }
