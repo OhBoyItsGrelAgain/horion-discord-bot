@@ -1,7 +1,7 @@
 package de.richard.horionbot.commands;
 
 import de.richard.horionbot.Main;
-import de.richard.horionbot.utils.BotInfo;
+import de.richard.horionbot.utils.BotUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -22,7 +22,7 @@ public class InfoCommand extends Command
                 .setDescription("horion discord bot, only for epic gamers")
                 .setColor(new Color(255, 176, 111))
                 .addField("Version", Main.version, false)
-                .addField("Uptime", BotInfo.getUptime(), false)
+                .addField("Uptime", BotUtil.getUptime(), false)
                 .addField("ID", e.getJDA().getSelfUser().getId(), false)
                 .addField("GitHub", "https://github.com/richardletshacks/horion-discord-bot", false)
                 .setFooter("Made by Richard, with help of the Java-Discord-API (JDA)", null)

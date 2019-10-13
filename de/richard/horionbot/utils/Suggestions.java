@@ -4,6 +4,7 @@ import de.richard.horionbot.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.MarkdownUtil;
 
 import java.awt.*;
 import java.io.*;
@@ -74,7 +75,6 @@ public class Suggestions extends ListenerAdapter {
             InputStream is = new FileInputStream("suggestions/" + SuggestionID + ".xml");
             Properties prop = new Properties();
             prop.loadFromXML(is);
-            String authorID = prop.getProperty("authorID");
             String title = prop.getProperty("title");
             String description = prop.getProperty("description");
             User author = Main.bot.getUserById(prop.getProperty("authorID"));
@@ -82,10 +82,10 @@ public class Suggestions extends ListenerAdapter {
                     .setColor(new Color(0x4D95E9))
                     .setTitle(title)
                     .setDescription(description)
-                    .setFooter("SuggestionID: " + SuggestionID + " | Suggested by " + Objects.requireNonNull(suggestionChannel.getGuild().getMemberById(authorID)).getUser().getAsTag(), null)
+                    .setFooter("SuggestionID: " + SuggestionID + " | Suggested by " + Objects.requireNonNull(author).getAsTag(), null)
                     .build();
             acceptedSuggestionsChannel.sendMessage(suggestion).queue((m) -> m.addReaction(Objects.requireNonNull(Main.bot.getGuildById("503336354546057218")).getEmotesByName("accept", true).get(0)).queue());
-            assert author != null;
+            BotUtil.log("Suggestion accepted", "Suggestion " + MarkdownUtil.bold("\"" + title + "\"") + " with ID " + SuggestionID + " accepted by " + accepter.getAsMention() + ".", new Color(0x84D26A));
             author.openPrivateChannel().complete().sendMessage(new EmbedBuilder()
                     .setColor(new Color(0x4D95E9))
                     .setTitle("Congrats! Your suggestion just got approved!")
@@ -104,10 +104,11 @@ public class Suggestions extends ListenerAdapter {
             prop.loadFromXML(is);
             String title = prop.getProperty("title");
             String description = "Your suggestion \"" + title + "\" was denied by " + denier.getAsMention() + ". Maybe you're lucky next time :(";
+            User author = Main.bot.getUserById(prop.getProperty("authorID"));
             if (denier == Main.bot.getSelfUser()) {
                 description = "Your suggestion \"" + title + "\" was denied by the community (You got too many downvotes). Maybe you're lucky next time :(";
             }
-            User author = Main.bot.getUserById(prop.getProperty("authorID"));
+            BotUtil.log("Suggestion denied", "Suggestion " + MarkdownUtil.bold("\"" + title + "\"") + " with ID " + SuggestionID + " denied by " + denier.getAsMention() + ".", new Color(0xD24448));
             assert author != null;
             author.openPrivateChannel().complete().sendMessage(new EmbedBuilder()
                     .setColor(new Color(0x4D95E9))

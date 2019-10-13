@@ -1,7 +1,7 @@
 package de.richard.horionbot;
 
 import de.richard.horionbot.commands.*;
-import de.richard.horionbot.utils.BotInfo;
+import de.richard.horionbot.utils.BotUtil;
 import de.richard.horionbot.utils.CommandManager;
 import de.richard.horionbot.utils.ConfigManager;
 import net.dv8tion.jda.api.JDA;
@@ -52,6 +52,6 @@ public class Main
 
         // Scheduler
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleWithFixedDelay(BotInfo::updateGame, 0, 60, TimeUnit.SECONDS);
+        executor.scheduleWithFixedDelay(BotUtil::updateGame, 0, 60, TimeUnit.SECONDS);
     }
 }

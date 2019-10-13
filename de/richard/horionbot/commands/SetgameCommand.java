@@ -1,6 +1,6 @@
 package de.richard.horionbot.commands;
 
-import de.richard.horionbot.utils.BotInfo;
+import de.richard.horionbot.utils.BotUtil;
 import de.richard.horionbot.utils.UserInfo;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -23,7 +23,7 @@ public class SetgameCommand extends Command
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** Please specify a game").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         } else {
             game = String.join(" ", args).substring(args[0].length() + 1);
-            BotInfo.updateGame();
+            BotUtil.updateGame();
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Success:** Game changed to *" + game + "*").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
         }} else {
             e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Error:** You're not allowed to use this command").build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));

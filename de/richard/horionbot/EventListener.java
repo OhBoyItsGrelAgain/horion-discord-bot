@@ -40,7 +40,7 @@ public class EventListener extends ListenerAdapter {
             }
 
             // Admin reacts to suggestion
-            if (e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
+            if (Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
                 if (e.getReactionEmote().equals(MessageReaction.ReactionEmote.fromCustom(acceptReaction))) {
                         acceptSuggestion(SuggestionID, e.getUser());
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
@@ -48,6 +48,7 @@ public class EventListener extends ListenerAdapter {
                     denySuggestion(SuggestionID, e.getUser());
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
                 }
+                return;
             }
 
             // Remove suggestion if author denys it
