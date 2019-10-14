@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class BotUtil {
 
-    public static TextChannel logChannel = Objects.requireNonNull(Main.bot.getGuildById("605086182560235569")).getTextChannelById("605151433578250251");
+    private static TextChannel logChannel = Objects.requireNonNull(Main.bot.getGuildById("605086182560235569")).getTextChannelById("605151433578250251");
 
     public static String getUptime() {
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime() / 1000;

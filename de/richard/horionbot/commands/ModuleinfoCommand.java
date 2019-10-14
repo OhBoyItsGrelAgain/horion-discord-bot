@@ -6,165 +6,85 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
 
 public class ModuleinfoCommand extends Command
 {
     private TextChannel channel;
-    private String footer;
 
     @Override
     public void onCommand(MessageReceivedEvent e, String[] args) {
+
+        Map<String, String> modules = new TreeMap<>();
+        modules.put("Killaura", "Automatically attacks entities around you");
+        modules.put("Aimbot", "Automatically aims at the nearest player for you");
+        modules.put("TriggerBot", "Automatically attacks the entity you're looking at");
+        modules.put("BowAimbot", "Automatically aims at the nearest player for you");
+        modules.put("InfiniteReach", "Killaura with infinite reach. May not work on some servers, uses an exploit.");
+        modules.put("Hitbox", "Resize the hitbox of entities");
+        modules.put("Reach", "Extends your reach");
+        modules.put("ESP", "Highlights entities and lets you see them through walls");
+        modules.put("ChestESP", "Highlights chests and lets you seem them through walls");
+        modules.put("RainbowSky", "Turns the sky rainbow");
+        modules.put("Tracer", "Draws lines to ESP highlighted entities");
+        modules.put("X-Ray", "Find ores easier");
+        modules.put("ClickGui", "Click-GUI");
+        modules.put("TabGui", "Tab-GUI");
+        modules.put("Fullbright", "Max brightness everywhere");
+        modules.put("Jetpack", "Fly like you had a jetpack");
+        modules.put("NoKnockback", "Prevents you from taking knockback");
+        modules.put("AirJump", "Jump around freely, even in air");
+        modules.put("Step", "Automatically steps up blocks");
+        modules.put("Glide", "Glide through the air");
+        modules.put("Phase", "Lets you walk through blocks");
+        modules.put("AutoSprint", "Automatically sprints");
+        modules.put("NoFall", "Prevents you from taking falldamage");
+        modules.put("Speed", "Make your player faster");
+        modules.put("NoSlowDown", "Prevents you from slowing down when eating");
+        modules.put("Fly", "Fly like in creative mode");
+        modules.put("AirSwim", "Swim in air");
+        modules.put("InventoryMove", "Move freely although you're in your inventory");
+        modules.put("HighJump", "Lets you jump higher");
+        modules.put("NoWeb", "Prevents you from getting slowed down by webs");
+        modules.put("FastLadder", "Climb ladders faster");
+        modules.put("Jesus", "Move faster through water.");
+        modules.put("Scaffold", "Places blocks beneath you as you walk");
+        modules.put("Nuker", "Destroy multiple blocks with one hit");
+        modules.put("InstaBreak", "Instantly break a block just by hitting it once");
+        modules.put("EditionFaker", "Tells a server you're on android");
+        modules.put("Freecam", "Move your camera around freely");
+        modules.put("Blink", "Stores packets you're sending and sends them at once when toggled off");
+        modules.put("NoPacket", "Prevents you from sending InventoryTransaction packets");
+        modules.put("BedFucker", "Destroys eggs, cakes and beds around you");
+        modules.put("AutoTotem", "Automatically puts totems in your offhand");
+        modules.put("ChestStealer", "Automatically takes all items out of a chest");
+        modules.put("StackableItem", "Stack items you normally wouldn't be able to stack");
+        modules.put("FastEat", "Consume food faster");
+        modules.put("AutoClicker", "Automatically clicks (attacks/builds) for you when you hold left/right mouse button");
+        modules.put("BugUp", "Automatically teleports you back to a safe position if you fall more than X blocks (X can be modified)");
+        modules.put("AutoArmor", "Automatically equips the best armor in your inventory");
+        modules.put("NameTags", "Shows better nametags above players that can be seen in a further range than vanilla nametags");
+        modules.put("Bhop", "Hop around like a bunny!");
+        modules.put("Criticals", "Each hit you hit is a critical hit");
+        modules.put("Tower", "Like scaffold, but vertical (Hold space to tower up)");
+
         channel = e.getTextChannel();
-        footer = e.getAuthor().getAsTag() + " wrote: " + e.getMessage().getContentDisplay();
         if (args.length < 2)
             sendAnswer("No module specified", "Please use the correct syntax: **.moduleinfo <module>**");
         else {
-            switch (args[1].toLowerCase()) {
-                case "killaura":
-                    sendAnswer("Killaura", "Automatically attacks entitys around you");
-                    break;
-                case "aimbot":
-                    sendAnswer("Aimbot", "Automatically aims at the nearest player for you");
-                    break;
-                case "triggerbot":
-                    sendAnswer("TriggerBot", "Automatically attacks the entity you're looking at");
-                    break;
-                case "bowaimbot":
-                    sendAnswer("BowAimbot", "Automatically aims at the nearest player for you");
-                    break;
-                case "infinitereach":
-                    sendAnswer("InfiniteReach", "Killaura with infinite reach. May not work on some servers, uses an exploit.");
-                    break;
-                case "hitbox":
-                    sendAnswer("Hitbox", "Resize the hitbox of entitys");
-                    break;
-                case "reach":
-                    sendAnswer("Reach", "Extends your reach");
-                    break;
-                case "esp":
-                    sendAnswer("ESP", "Highlights entitys and lets you see them through walls");
-                    break;
-                case "chestesp":
-                    sendAnswer("ChestESP", "Highlights chests and lets you seem them through walls");
-                    break;
-                case "rainbowsky":
-                    sendAnswer("RainbowSky", "Turns the sky rainbow");
-                    break;
-                case "tracer":
-                    sendAnswer("Tracer", "Draws lines to ESP highlighted entitys");
-                    break;
-                case "xray":
-                    sendAnswer("X-Ray", "Find ores easier");
-                    break;
-                case "clickgui":
-                    sendAnswer("ClickGui", "Click-GUI");
-                    break;
-                case "tabgui":
-                    sendAnswer("TabGui", "Tab-GUI");
-                    break;
-                case "fullbright":
-                    sendAnswer("Fullbright", "Max brightness everywhere");
-                    break;
-                case "jetpack":
-                    sendAnswer("Jetpack", "Fly like you had a jetpack");
-                    break;
-                case "noknockback":
-                    sendAnswer("NoKnockback", "Prevents you from taking knockback");
-                    break;
-                case "airjump":
-                    sendAnswer("AirJump", "Jump around freely, even in air");
-                    break;
-                case "step":
-                    sendAnswer("Step", "Automatically steps up blocks");
-                    break;
-                case "glide":
-                    sendAnswer("Glide", "Glide through the air");
-                    break;
-                case "phase":
-                    sendAnswer("Phase", "Lets you walk through blocks");
-                    break;
-                case "autosprint":
-                    sendAnswer("AutoSprint", "Automatically sprints");
-                    break;
-                case "nofall":
-                    sendAnswer("NoFall", "Prevents you from taking falldamage");
-                    break;
-                case "speed":
-                    sendAnswer("Speed", "Make your player faster");
-                    break;
-                case "noslowdown":
-                    sendAnswer("NoSlowDown", "Prevents you from slowing down when eating");
-                    break;
-                case "fly":
-                    sendAnswer("Fly", "Fly like in creative mode");
-                    break;
-                case "airswim":
-                    sendAnswer("AirSwim", "Swim in air");
-                    break;
-                case "inventorymove":
-                    sendAnswer("InventoryMove", "Move freely although you're in your inventory");
-                    break;
-                case "highjump":
-                    sendAnswer("HighJump", "Lets you jump higher");
-                    break;
-                case "noweb":
-                    sendAnswer("NoWeb", "Prevents you from getting slowed down by webs");
-                    break;
-                case "fastladder":
-                    sendAnswer("FastLadder", "Climb ladders faster");
-                    break;
-                case "jesus":
-                    sendAnswer("Jesus", "Move faster through water.");
-                    break;
-                case "scaffold":
-                    sendAnswer("Scaffold", "Places blocks beneath you as you walk");
-                    break;
-                case "nuker":
-                    sendAnswer("Nuker", "Destroy multiple blocks with one hit");
-                    break;
-                case "instabreak":
-                    sendAnswer("InstaBreak", "Instantly break a block just by hitting it once");
-                    break;
-                case "editionfaker":
-                    sendAnswer("EditionFaker", "Tells a server you're on android");
-                    break;
-                case "freecam":
-                    sendAnswer("Freecam", "Move your camera around freely");
-                    break;
-                case "blink":
-                    sendAnswer("Blink", "Stores packets you're sending and sends them at once when toggled off");
-                    break;
-                case "nopacket":
-                    sendAnswer("NoPacket", "Prevents you from sending InventoryTransaction packets");
-                    break;
-                case "bedfucker":
-                    sendAnswer("BedFucker", "Destroys eggs, cakes and beds around you");
-                    break;
-                case "autototem":
-                    sendAnswer("AutoTotem", "Automatically puts totems in your offhand");
-                    break;
-                case "cheststealer":
-                    sendAnswer("ChestStealer", "Automatically takes all items out of a chest");
-                    break;
-                case "stackableitem":
-                    sendAnswer("StackableItem", "Stack items you normally wouldnt be able to stack");
-                    break;
-                case "fasteat":
-                    sendAnswer("FastEat", "Consume food faster");
-                    break;
-                default:
-                    sendAnswer("Module not found", "Did you put the correct name?");
+            String module = args[1];
+            if (modules.containsKey(module)) {
+                sendAnswer(module, modules.get(module));
+            } else {
+                sendAnswer("Module not found", "Did you put the correct name?");
             }
         }
     }
 
     private void sendAnswer(String name, String description) {
-        MessageEmbed msg = new EmbedBuilder().setDescription(description).setTitle(name).setColor(new Color(0x4D95E9)).setFooter(footer, null).build();
-        channel.sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
+        MessageEmbed msg = new EmbedBuilder().setDescription(description).setTitle(name).setColor(new Color(0x4D95E9)).build();
+        channel.sendMessage(msg).queue();
     }
 
     @Override

@@ -3,7 +3,6 @@ package de.richard.horionbot.utils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Downloader
@@ -26,18 +25,11 @@ public class Downloader
             {
                 webpageText.append(line);
             }
-        }
-        catch (MalformedURLException mue)
+        } catch (IOException mue)
         {
             mue.printStackTrace();
             return null;
-        }
-        catch (IOException ioe)
-        {
-            ioe.printStackTrace();
-            return null;
-        }
-        finally
+        } finally
         {
             try
             {
@@ -51,7 +43,7 @@ public class Downloader
         return webpageText.toString();
     }
 
-    public static BufferedImage image(String urlText)
+    static BufferedImage image(String urlText)
     {
         try
         {
@@ -76,7 +68,7 @@ public class Downloader
         InputStream in = new BufferedInputStream(link.openStream());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buf = new byte[1024];
-        int n = 0;
+        int n;
         while (-1!=(n=in.read(buf)))
         {
             out.write(buf, 0, n);
