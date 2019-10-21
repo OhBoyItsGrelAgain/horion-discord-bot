@@ -1,5 +1,8 @@
 package de.richard.horionbot.utils;
 
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 
 import java.awt.image.BufferedImage;
@@ -17,4 +20,8 @@ public class UserInfo {
         return Downloader.image(user.getAvatarUrl());
     }
 
+    public static boolean canManageSuggestions(Member member) {
+        Role helper = member.getGuild().getRoleById("635618500135878688");
+        return (member.hasPermission(Permission.ADMINISTRATOR) || member.getRoles().contains(helper));
+    }
 }

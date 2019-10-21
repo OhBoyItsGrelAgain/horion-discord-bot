@@ -6,6 +6,7 @@ import de.richard.horionbot.commands.SetgameCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.awt.*;
@@ -56,7 +57,7 @@ public class BotUtil {
                 .build()).queue();
     }
 
-    public static JSONObject retrieveJson(String url) {
+    public static JSONObject retrieveJsonObject(String url) {
         try {
             InputStream is = new URL(url).openStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
@@ -67,6 +68,24 @@ public class BotUtil {
             }
             String jsonText = sb.toString();
             return new JSONObject(jsonText);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JSONArray retrieveJsonArray(String url) {
+        try {
+            InputStream is = new URL(url).openStream();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            int cp;
+            while ((cp = rd.read()) != -1) {
+                sb.append((char) cp);
+            }
+            String jsonText = sb.toString();
+            return new JSONArray(jsonText);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

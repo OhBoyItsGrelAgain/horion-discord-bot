@@ -4,6 +4,7 @@ import de.richard.horionbot.commands.*;
 import de.richard.horionbot.utils.BotUtil;
 import de.richard.horionbot.utils.CommandManager;
 import de.richard.horionbot.utils.ConfigManager;
+import de.richard.horionbot.utils.FileChangeListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -53,5 +54,7 @@ public class Main
         // Scheduler
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         executor.scheduleWithFixedDelay(BotUtil::updateGame, 0, 60, TimeUnit.SECONDS);
+
+        FileChangeListener.init();
     }
 }

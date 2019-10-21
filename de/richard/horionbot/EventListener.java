@@ -1,8 +1,8 @@
 package de.richard.horionbot;
 
 import de.richard.horionbot.utils.Suggestions;
+import de.richard.horionbot.utils.UserInfo;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.MessageReaction;
@@ -40,7 +40,7 @@ public class EventListener extends ListenerAdapter {
             }
 
             // Admin reacts to suggestion
-            if (Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
+            if (UserInfo.canManageSuggestions(Objects.requireNonNull(e.getMember())) && !e.getUser().isBot()) {
                 if (e.getReactionEmote().equals(MessageReaction.ReactionEmote.fromCustom(acceptReaction))) {
                         acceptSuggestion(SuggestionID, e.getUser());
                     e.getTextChannel().deleteMessageById(e.getMessageId()).queue();
@@ -80,7 +80,7 @@ public class EventListener extends ListenerAdapter {
             MessageEmbed oldembed = message.getEmbeds().get(0);
             String SuggestionID = Objects.requireNonNull(Objects.requireNonNull(oldembed.getFooter()).getText()).substring(14);
             SuggestionID = SuggestionID.substring(0, 36);
-            if(e.getMember().hasPermission(Permission.ADMINISTRATOR) && !e.getUser().isBot()) {
+            if (UserInfo.canManageSuggestions(Objects.requireNonNull(e.getMember())) && !e.getUser().isBot()) {
                 if (e.getReactionEmote().equals(MessageReaction.ReactionEmote.fromCustom(acceptReaction))) {
                     MessageEmbed newEmbed = new EmbedBuilder()
                             .setColor(new Color(0x84D26A))
