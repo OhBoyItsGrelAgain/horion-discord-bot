@@ -97,5 +97,11 @@ public class EventListener extends ListenerAdapter {
                 if(!e.getUser().getId().equalsIgnoreCase("605822602400890903")) e.getReaction().removeReaction(e.getUser()).queue();
             }
         }
+
+        // User accepts rules
+        if (e.getMessageId().equals("635607118275411985")) {
+            if (e.getReaction().getReactionEmote().getName().equals("accept"))
+                e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()), java.util.Objects.requireNonNull(e.getGuild().getRoleById("635625569471430668"))).queue();
+        }
     }
 }
