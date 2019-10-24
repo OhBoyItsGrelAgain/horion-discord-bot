@@ -104,15 +104,15 @@ public class EventListener extends ListenerAdapter {
 
         // User accepts rules
         if (e.getMessageId().equals("635607118275411985")) {
-            if (e.getReaction().getReactionEmote().getName().equals("accept"))
+            if (e.getReactionEmote().getName().equals("accept"))
                 e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()), java.util.Objects.requireNonNull(e.getGuild().getRoleById("635625569471430668"))).queue();
         }
         if (e.getMessageId().equals("636666977808678979")) {
-            if (e.getReaction().getReactionEmote().getEmoji().equals("\uD83C\uDD95"))
+            if (e.getReactionEmote().isEmoji() && e.getReactionEmote().getEmoji().equals("\uD83C\uDD95"))
                 e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()), java.util.Objects.requireNonNull(e.getGuild().getRoleById("636662238588960841"))).queue();
         }
         if (e.getMessageId().equals("636666977808678979")) {
-            if (e.getReaction().getReactionEmote().getName().equals("betatester"))
+            if (e.getReactionEmote().getName().equals("betatester"))
                 e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()), java.util.Objects.requireNonNull(e.getGuild().getRoleById("636662120431353917"))).queue();
         }
         // User wants to be notified
@@ -121,15 +121,15 @@ public class EventListener extends ListenerAdapter {
     @Override
     public void onMessageReactionRemove(MessageReactionRemoveEvent e) {
         if (e.getMessageId().equals("635607118275411985")) {
-            if (e.getReaction().getReactionEmote().getName().equals("accept"))
+            if (e.getReactionEmote().getName().equals("accept"))
                 e.getGuild().removeRoleFromMember(Objects.requireNonNull(e.getMember()), java.util.Objects.requireNonNull(e.getGuild().getRoleById("635625569471430668"))).queue();
         }
         if (e.getMessageId().equals("636666977808678979")) {
-            if (e.getReaction().getReactionEmote().getEmoji().equals("\uD83C\uDD95"))
+            if (e.getReactionEmote().isEmoji() && e.getReactionEmote().getEmoji().equals("\uD83C\uDD95"))
                 e.getGuild().removeRoleFromMember(Objects.requireNonNull(e.getMember()), java.util.Objects.requireNonNull(e.getGuild().getRoleById("636662238588960841"))).queue();
         }
         if (e.getMessageId().equals("636666977808678979")) {
-            if (e.getReaction().getReactionEmote().getName().equals("betatester"))
+            if (e.getReactionEmote().getName().equals("betatester"))
                 e.getGuild().removeRoleFromMember(Objects.requireNonNull(e.getMember()), java.util.Objects.requireNonNull(e.getGuild().getRoleById("636662120431353917"))).queue();
         }
     }
