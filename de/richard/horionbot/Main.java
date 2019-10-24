@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main
 {
-    public static String version = "1.8";
+    public static String version = "2.1";
     public static JDA bot;
 
     public static void main(String[] args)
@@ -50,6 +50,8 @@ public class Main
         bot = jda.build();
         bot.awaitReady();
         bot.setAutoReconnect(true);
+
+        System.setProperty("http.agent", "HorionBot");
 
         // Scheduler
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);

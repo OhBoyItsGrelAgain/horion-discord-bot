@@ -23,6 +23,9 @@ public class BotUtil {
 
     private static TextChannel logChannel = Objects.requireNonNull(Main.bot.getGuildById("605086182560235569")).getTextChannelById("605151433578250251");
 
+    public BotUtil() throws IOException {
+    }
+
     public static String getUptime() {
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime() / 1000;
         long uptimeHours = uptime / (60 * 60);
@@ -57,37 +60,31 @@ public class BotUtil {
                 .build()).queue();
     }
 
-    public static JSONObject retrieveJsonObject(String url) {
+    static JSONObject retrieveJsonObject(String url) {
         try {
-            InputStream is = new URL(url).openStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder();
-            int cp;
-            while ((cp = rd.read()) != -1) {
-                sb.append((char) cp);
-            }
-            String jsonText = sb.toString();
-            return new JSONObject(jsonText);
+            return new JSONObject(getJSON(url));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static JSONArray retrieveJsonArray(String url) {
+        try {
+            return new JSONArray(getJSON(url));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static JSONArray retrieveJsonArray(String url) {
-        try {
-            InputStream is = new URL(url).openStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder();
-            int cp;
-            while ((cp = rd.read()) != -1) {
-                sb.append((char) cp);
-            }
-            String jsonText = sb.toString();
-            return new JSONArray(jsonText);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private static String getJSON(String url) throws IOException {
+        InputStream is = new URL(url).openStream();
+        BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
         }
+        return sb.toString();
     }
 }

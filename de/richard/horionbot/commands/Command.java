@@ -1,5 +1,6 @@
 package de.richard.horionbot.commands;
 
+import de.richard.horionbot.utils.BotUtil;
 import de.richard.horionbot.utils.ConfigManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
@@ -10,7 +11,9 @@ import net.dv8tion.jda.api.exceptions.PermissionException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.utils.MarkdownUtil;
 
+import java.awt.*;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Command extends ListenerAdapter
 {
@@ -39,12 +42,15 @@ public abstract class Command extends ListenerAdapter
             } catch (PermissionException ex) {
                 System.out.println("Bot is lacking MANAGE_MESSAGES permission");
             }
+            BotUtil.log("Command executed", Objects.requireNonNull(e.getMember()).getAsMention() + " executed command: " + MarkdownUtil.monospace(e.getMessage().getContentDisplay()) + " in " + e.getTextChannel().getAsMention(), new Color(0x4D95E9));
         }
     }
 
     private boolean containsCommand(Message message)
     {
-        return getAliases().contains(commandArgs(message)[0].substring(Prefix.length()).toLowerCase()) && message.getContentDisplay().startsWith(Command.Prefix);
+        if (commandArgs(message)[0].length() > Prefix.length())
+            return getAliases().contains(commandArgs(message)[0].substring(Prefix.length()).toLowerCase()) && message.getContentDisplay().startsWith(Command.Prefix);
+        return false;
     }
 
     private String[] commandArgs(Message message)

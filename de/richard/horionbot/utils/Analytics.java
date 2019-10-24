@@ -12,6 +12,6 @@ class Analytics {
     }
 
     private static void update() {
-        Analytics = BotUtil.retrieveJsonObject("http://hbob.ml/horion/status.php");
+        Analytics = BotUtil.retrieveJsonObject("https://hbob.ml/horion/status.php");
     }
 }
