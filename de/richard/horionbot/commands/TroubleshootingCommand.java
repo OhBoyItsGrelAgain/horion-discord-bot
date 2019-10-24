@@ -39,14 +39,14 @@ public class TroubleshootingCommand extends Command
         if (mentioned.size() > 0) {
             if (Objects.requireNonNull(e.getMessage().getMember()).hasPermission(Permission.MESSAGE_MANAGE) || UserInfo.isBotAdmin(e.getAuthor())) {
                     mentioned.get(0).openPrivateChannel().complete().sendMessage(msg).queue(
-                            (m) -> e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Troubleshooting-Message successfully sent to " + mentioned.get(0).getAsMention()).build()).queue((msg1) -> msg1.delete().submitAfter(60, TimeUnit.SECONDS)),
-                            (m) -> e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Failure: " + mentioned.get(0).getAsMention() + " doesn't have DMs enabled.").build()).queue((msg2) -> msg2.delete().submitAfter(60, TimeUnit.SECONDS))
+                            (m) -> e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Troubleshooting-Message successfully sent to " + mentioned.get(0).getAsMention()).build()).queue((msg1) -> msg1.delete().submitAfter(180, TimeUnit.SECONDS)),
+                            (m) -> e.getTextChannel().sendMessage(new EmbedBuilder().setDescription("Failure: " + mentioned.get(0).getAsMention() + " doesn't have DMs enabled.").build()).queue((msg2) -> msg2.delete().submitAfter(180, TimeUnit.SECONDS))
                     );
                 } else {
-                    e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
+                    e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(180, TimeUnit.SECONDS));
                 }
         } else {
-            e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
+            e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(180, TimeUnit.SECONDS));
         }
     }
 

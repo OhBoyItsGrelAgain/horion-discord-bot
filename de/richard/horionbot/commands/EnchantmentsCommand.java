@@ -172,7 +172,7 @@ public class EnchantmentsCommand extends Command
 
     private void sendAnswer(String name, String description) {
         MessageEmbed msg = new EmbedBuilder().setDescription(description).setTitle(name).setColor(new Color(0x4D95E9)).build();
-        channel.sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
+        channel.sendMessage(msg).queue((m) -> m.delete().submitAfter(180, TimeUnit.SECONDS));
     }
 
     @Override
