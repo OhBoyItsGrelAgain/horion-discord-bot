@@ -33,7 +33,7 @@ public class HelpCommand extends Command
             e.getTextChannel().sendMessage(new EmbedBuilder()
                     .setColor(new Color(0x4D95E9))
                     .setDescription("Help was sent to you as private message, " + e.getAuthor().getAsMention())
-                    .build()).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
+                    .build()).queue((m) -> m.delete().submitAfter(180, TimeUnit.SECONDS));
         }
         sendPrivate(e.getAuthor(), args);
     }
