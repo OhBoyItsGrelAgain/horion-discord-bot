@@ -27,7 +27,7 @@ public class InfoCommand extends Command
                 .addField("GitHub", "https://github.com/richardletshacks/horion-discord-bot", false)
                 .setFooter("Made by Richard, with help of the Java-Discord-API (JDA)", null)
                 .build();
-        e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(60, TimeUnit.SECONDS));
+        e.getTextChannel().sendMessage(msg).queue((m) -> m.delete().submitAfter(180, TimeUnit.SECONDS));
     }
 
     @Override
